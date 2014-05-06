@@ -7,6 +7,8 @@
 //
 
 #import "DTIComputerPlayerRule.h"
+#import "DTIWinRule.h"
+#import "DTIBlockRule.h"
 
 @implementation DTIComputerPlayerRule
 
@@ -20,10 +22,40 @@
     return self;
 }
 
--(NSNumber*)tryPlay
+// Each of these rules must be applied in this order to ensure a win or draw
++(NSArray*)buildAllWithGameBoard:(DTIGameBoard*)board andSquares:(NSArray*)squares
+{
+    return @[[[DTIWinRule alloc] initWithGameBoard:board andSquares:squares],
+             [[DTIBlockRule alloc] initWithGameBoard:board andSquares:squares]];
+}
+
+-(bool)tryPlay
 {
     // To implement in subtypes
     return nil;
+}
+
+-(NSNumber*)tryFindEmptySpaceInSquares:(NSInteger)one
+                                      :(NSInteger)two
+                                      :(NSInteger)three
+{
+    if(_squares[three] == nil
+       && [self twoSquaresAreEqual:one :two] )
+        return @(three);
+    else if(_squares[one] == nil
+            && [self twoSquaresAreEqual:two:three] )
+        return @(one);
+    else if(_squares[two] == nil
+            && [self twoSquaresAreEqual:one:three] )
+        return @(two);
+
+    return nil;
+}
+
+-(bool)twoSquaresAreEqual:(NSInteger)one
+                         :(NSInteger)two
+{
+    return _squares[one] != nil && [_squares[one] isEqualToValue:_squares[two]];
 }
 
 @end

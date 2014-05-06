@@ -17,5 +17,6 @@
 -(NSArray*)generateAllWinningSequences;
 -(NSArray*)generateDrawSequences;
 -(NSArray*)generateOneMoveFromWinningSequences;
+-(NSArray*)generateForkableSequences;
 
 @end

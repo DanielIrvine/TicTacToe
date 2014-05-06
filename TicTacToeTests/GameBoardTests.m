@@ -41,11 +41,6 @@
     {
         DTIGameBoard* board = [[DTIGameBoard alloc] initWithComputerPlayerAs:'X'];
         [self playSequence:sequence on:board];
-
-        if(![board isDrawn])
-        {
-            NSLog(@"Sequence:%@", sequence);
-        }
         XCTAssertTrue([board isDrawn]);
     }
 }
@@ -57,9 +52,36 @@
         DTIGameBoard* board = [[DTIGameBoard alloc] initWithComputerPlayerAs:'X'];
         [self playSequence:sequence on:board];
         [board playBestMove];
+        // FIXME: test currently broken
         XCTAssertTrue([board isWon]);
     }
 }
+
+-(void)testWhenComputerPlayerCanBlockThenBlockIsTaken
+{
+    for( NSString* sequence in [_seqGen generateOneMoveFromWinningSequences])
+    {
+        DTIGameBoard* board = [[DTIGameBoard alloc] initWithComputerPlayerAs:'O'];
+        [self playSequence:sequence on:board];
+        [board playBestMove];
+        // FIXME: test currently broken
+        XCTAssertTrue([board isWon]);
+
+    }
+}
+
+-(void)testWhenComputerPlayerCanForkThenForkIsTaken
+{
+    for( NSString* sequence in [_seqGen generateForkableSequences])
+    {
+        DTIGameBoard* board = [[DTIGameBoard alloc] initWithComputerPlayerAs:'X'];
+        [self playSequence:sequence on:board];
+        [board playBestMove];
+
+        // TODO: what to test here..
+    }
+}
+
 
 -(void)playSequence:(NSString*)sequence on:(DTIGameBoard*)board
 {

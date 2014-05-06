@@ -9,6 +9,7 @@
 #import "DTIGameBoard.h"
 #import "DTIComputerPlayerRule.h"
 #import "DTIWinRule.h"
+#import "DTIBlockRule.h"
 
 @implementation DTIGameBoard
 
@@ -28,15 +29,10 @@
                              @[@0,@4,@8],
                              @[@2,@4,@6]];
 
-        [self assignRulesInOrder];
+        _computerPlayerRules = [DTIComputerPlayerRule buildAllWithGameBoard:self
+                                                                 andSquares:_squares];
     }
     return self;
-}
-
-// Each of these rules must be applied in this order to ensure a win or draw
--(void)assignRulesInOrder
-{
-    _computerPlayerRules = @[[[DTIWinRule alloc] initWithGameBoard:self andSquares:_squares]];
 }
 
 -(bool)isWon
@@ -47,7 +43,10 @@
                                       :[winningTriplet[1] integerValue]
                                       :[winningTriplet[2] integerValue]])
         {
-            return true;
+            if( [_squares[[winningTriplet[0] integerValue]] isEqualToValue:_player] )
+            {
+                return true;
+            }
         }
     }
     return false;

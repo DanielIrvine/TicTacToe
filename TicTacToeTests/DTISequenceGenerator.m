@@ -98,6 +98,24 @@
     return oneMoveFromWinning;
 }
 
+-(NSArray*)generateForkableSequences
+{
+    // It's just simpler to write these out. To generate them would
+    // require at least two for loops which would be confusing to read.
+    return @[@"X---X----",
+             @"X----X---",
+             @"X------X-",
+             @"X-------X",
+             @"-X-X-----",
+             @"-X---X---",
+             @"-X----X--",
+             @"-X------X",
+             @"--XX-----",
+             @"--X-X----",
+             @"--X---X--",
+             @"--X----X-"];
+}
+
 -(NSString*)generateSequenceFromValue:(NSInteger)value
 {
     char chars[9];
