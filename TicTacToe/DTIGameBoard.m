@@ -87,29 +87,29 @@
 
         if( move != nil )
         {
-            NSLog(@"Sequence:%@", _squares);
+            NSNumber* player = move == winningTriplet[0] ? winningTriplet[1] : winningTriplet[0];
 
-            _squares[[move integerValue]] = _player;
+            if( player == _player )
+            {
+                _squares[[move integerValue]] = _player;
+                break;
+            }
         }
     }
 }
-
 
 -(NSNumber*)tryFindEmptySpaceinSquares:(NSInteger)one
                                     :(NSInteger)two
                                     :(NSInteger)three
 {
     if(_squares[three] == nil
-       && [self twoSquaresAreEqual:one :two]
-       && [_squares[one] isEqualToValue:_player] )
+       && [self twoSquaresAreEqual:one :two] )
         return @(three);
     else if(_squares[one] == nil
-            && [self twoSquaresAreEqual:two:three]
-            && [_squares[two] isEqualToValue:_player] )
+            && [self twoSquaresAreEqual:two:three] )
         return @(one);
     else if(_squares[two] == nil
-            && [self twoSquaresAreEqual:one:three]
-            && [_squares[three] isEqualToValue:_player] )
+            && [self twoSquaresAreEqual:one:three] )
         return @(two);
 
     return nil;
