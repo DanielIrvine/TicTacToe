@@ -10,28 +10,38 @@
 
 @implementation DTISequenceGenerator
 
+-(id)init
+{
+    if(self = [super init])
+    {
+        _regexRange = NSMakeRange(0, 9);
+        _xRegex = [NSRegularExpression regularExpressionWithPattern:@"X"
+                                                            options:0
+                                                              error:nil];
+    }
+
+    return self;
+}
+
 -(NSArray*)generateAllWinningSequences
 {
     NSArray* rowWins = @[@"XXX------", @"---XXX---", @"------XXX"];
     NSArray* columnWins = @[@"X--X--X--", @"-X--X--X-", @"--X--X--X"];
     NSArray* diagonalWins = @[@"X---X---X", @"--X-X-X--"];
 
-    NSArray* xWins = [[rowWins arrayByAddingObjectsFromArray:columnWins]
+    return [[rowWins arrayByAddingObjectsFromArray:columnWins]
                       arrayByAddingObjectsFromArray:diagonalWins];
-
-    NSArray* oWins = [self convertXWinsToOWins:xWins];
-
-    return [xWins arrayByAddingObjectsFromArray:oWins];
 }
 
--(NSArray*)convertXWinsToOWins:(NSArray*)xWins
+
+-(NSArray*)duplicateXWinsWithOWins:(NSArray*)xWins
 {
     NSMutableArray* oWins = [[NSMutableArray alloc] init];
 
     for( NSString* xWin in xWins )
         [oWins addObject:[xWin stringByReplacingOccurrencesOfString:@"X" withString:@"O"]];
 
-    return oWins;
+    return [xWins arrayByAddingObjectsFromArray:oWins];
 }
 
 -(NSArray*)generateDrawSequences
@@ -41,6 +51,7 @@
     // So create all permutations of 4 or 5 Xs and then remove
     // winning elements
     NSArray* winningSequences = [self generateAllWinningSequences];
+    winningSequences = [self duplicateXWinsWithOWins:winningSequences];
     NSMutableArray* drawSequences = [[NSMutableArray alloc] init];
 
     // Permutation is done by using a binary representation
@@ -64,6 +75,28 @@
     return drawSequences;
 }
 
+-(NSArray*)generateOneMoveFromWinningSequences
+{
+    NSArray* winningSequences = [self generateAllWinningSequences];
+
+    NSMutableArray* oneMoveFromWinning = [[NSMutableArray alloc] init];
+
+    for( NSString* sequence in winningSequences )
+    {
+        NSArray *matches = [_xRegex matchesInString:sequence
+                                            options:0
+                                              range:_regexRange];
+
+        for ( NSTextCheckingResult* match in matches )
+        {
+            NSMutableString* newSequence = [[NSMutableString alloc] initWithString:sequence];
+            [newSequence replaceCharactersInRange:match.range withString:@"-"];
+            [oneMoveFromWinning addObject:newSequence];
+        }
+    }
+
+    return oneMoveFromWinning;
+}
 
 -(NSString*)generateSequenceFromValue:(NSInteger)value
 {

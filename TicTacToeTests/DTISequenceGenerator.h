@@ -9,8 +9,13 @@
 #import <Foundation/Foundation.h>
 
 @interface DTISequenceGenerator : NSObject
+{
+    NSRange _regexRange;
+    NSRegularExpression* _xRegex;
+}
 
 -(NSArray*)generateAllWinningSequences;
 -(NSArray*)generateDrawSequences;
+-(NSArray*)generateOneMoveFromWinningSequences;
 
 @end

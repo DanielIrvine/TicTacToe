@@ -24,7 +24,7 @@
 		65F00F0919195515000657CB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65F00EDE19195514000657CB /* Foundation.framework */; };
 		65F00F0A19195515000657CB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65F00EE219195514000657CB /* UIKit.framework */; };
 		65F00F1219195515000657CB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 65F00F1019195515000657CB /* InfoPlist.strings */; };
-		65F00F1419195515000657CB /* TicTacToeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F00F1319195515000657CB /* TicTacToeTests.m */; };
+		65F00F1419195515000657CB /* GameBoardTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F00F1319195515000657CB /* GameBoardTests.m */; };
 		65F00F1F191958EC000657CB /* DTIGameBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F00F1E191958EC000657CB /* DTIGameBoard.m */; };
 		65F00F22191965A0000657CB /* DTISequenceGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F00F21191965A0000657CB /* DTISequenceGenerator.m */; };
 /* End PBXBuildFile section */
@@ -63,7 +63,7 @@
 		65F00F0719195515000657CB /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		65F00F0F19195515000657CB /* TicTacToeTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TicTacToeTests-Info.plist"; sourceTree = "<group>"; };
 		65F00F1119195515000657CB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		65F00F1319195515000657CB /* TicTacToeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TicTacToeTests.m; sourceTree = "<group>"; };
+		65F00F1319195515000657CB /* GameBoardTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameBoardTests.m; sourceTree = "<group>"; };
 		65F00F1D191958EC000657CB /* DTIGameBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTIGameBoard.h; sourceTree = "<group>"; };
 		65F00F1E191958EC000657CB /* DTIGameBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTIGameBoard.m; sourceTree = "<group>"; };
 		65F00F20191965A0000657CB /* DTISequenceGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTISequenceGenerator.h; sourceTree = "<group>"; };
@@ -160,7 +160,7 @@
 		65F00F0D19195515000657CB /* TicTacToeTests */ = {
 			isa = PBXGroup;
 			children = (
-				65F00F1319195515000657CB /* TicTacToeTests.m */,
+				65F00F1319195515000657CB /* GameBoardTests.m */,
 				65F00F0E19195515000657CB /* Supporting Files */,
 				65F00F20191965A0000657CB /* DTISequenceGenerator.h */,
 				65F00F21191965A0000657CB /* DTISequenceGenerator.m */,
@@ -290,7 +290,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				65F00F22191965A0000657CB /* DTISequenceGenerator.m in Sources */,
-				65F00F1419195515000657CB /* TicTacToeTests.m in Sources */,
+				65F00F1419195515000657CB /* GameBoardTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -499,6 +499,7 @@
 				65F00F1919195515000657CB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		65F00F1A19195515000657CB /* Build configuration list for PBXNativeTarget "TicTacToeTests" */ = {
 			isa = XCConfigurationList;
@@ -507,6 +508,7 @@
 				65F00F1C19195515000657CB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -10,10 +10,14 @@
 
 @interface DTIGameBoard : NSObject {
     NSMutableArray* _squares;
+    NSNumber* _player;
+    NSArray* _winningTriplets;
 }
 
+-(id)initWithComputerPlayerAs:(unichar)player;
 -(bool)isWon;
 -(bool)isDrawn;
+-(void)playBestMove;
 
 -(void)play:(unichar)player inSquare:(NSInteger)square;
 @end
