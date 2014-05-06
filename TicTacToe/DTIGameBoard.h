@@ -13,5 +13,7 @@
 }
 
 -(bool)isWon;
+-(bool)isDrawn;
+
 -(void)play:(unichar)player inSquare:(NSInteger)square;
 @end

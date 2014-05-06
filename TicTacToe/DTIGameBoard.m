@@ -45,6 +45,20 @@
     || [self threeSquaresAreEqual:2:4:6];
 }
 
+-(bool)isDrawn
+{
+    return [self noSquaresEmpty] && ![self isWon];
+}
+
+-(bool)noSquaresEmpty
+{
+    for(int i = 0; i < 9; ++i)
+        if(_squares[i] == nil)
+            return false;
+
+    return true;
+}
+
 -(bool)threeSquaresAreEqual:(NSInteger)one
                            :(NSInteger)two
                            :(NSInteger)three

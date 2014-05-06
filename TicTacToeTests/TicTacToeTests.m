@@ -8,6 +8,7 @@
 
 #import <XCTest/XCTest.h>
 #import "DTIGameBoard.h"
+#import "DTISequenceGenerator.h"
 
 @interface TicTacToeTests : XCTestCase
 
@@ -34,27 +35,32 @@
 
 -(void)testThatGameIsWon
 {
-    NSArray* rowWins = @[@"XXX------", @"---XXX---", @"------XXX"];
-    NSArray* columnWins = @[@"X--X--X--", @"-X--X--X-", @"--X--X--X"];
-    NSArray* diagonalWins = @[@"X---X---X", @"--X-X-X--"];
-
-    NSArray* allWins = [[rowWins arrayByAddingObjectsFromArray:columnWins]
-                                 arrayByAddingObjectsFromArray:diagonalWins];
-
-    for( NSString* sequence in allWins)
+    DTISequenceGenerator* seqGen = [[DTISequenceGenerator alloc] init];
+    for( NSString* sequence in [seqGen generateAllWinningSequences])
     {
-        [self runTestForGameSequence:sequence];
+        DTIGameBoard* board = [[DTIGameBoard alloc] init];
+        [self playSequence:sequence on:board];
+        XCTAssertTrue([board isWon]);
     }
 }
 
--(void)runTestForGameSequence:(NSString*)sequence
+-(void)testThatGameIsDrawn
 {
-    DTIGameBoard* board = [[DTIGameBoard alloc] init];
+    DTISequenceGenerator* seqGen = [[DTISequenceGenerator alloc] init];
+    for( NSString* sequence in [seqGen generateDrawSequences])
+    {
+        DTIGameBoard* board = [[DTIGameBoard alloc] init];
+        [self playSequence:sequence on:board];
+        XCTAssertTrue([board isDrawn]);
+    }
+}
+
+-(void)playSequence:(NSString*)sequence on:(DTIGameBoard*)board
+{
     for( int i = 0; i < 9; ++i )
     {
         [board play:[sequence characterAtIndex:i] inSquare:i];
     }
-    XCTAssertTrue([board isWon]);
 }
 
 
