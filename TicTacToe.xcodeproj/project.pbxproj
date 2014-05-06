@@ -25,6 +25,7 @@
 		65F00F0A19195515000657CB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65F00EE219195514000657CB /* UIKit.framework */; };
 		65F00F1219195515000657CB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 65F00F1019195515000657CB /* InfoPlist.strings */; };
 		65F00F1419195515000657CB /* TicTacToeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F00F1319195515000657CB /* TicTacToeTests.m */; };
+		65F00F1F191958EC000657CB /* DTIGameBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F00F1E191958EC000657CB /* DTIGameBoard.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,8 @@
 		65F00F0F19195515000657CB /* TicTacToeTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TicTacToeTests-Info.plist"; sourceTree = "<group>"; };
 		65F00F1119195515000657CB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		65F00F1319195515000657CB /* TicTacToeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TicTacToeTests.m; sourceTree = "<group>"; };
+		65F00F1D191958EC000657CB /* DTIGameBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTIGameBoard.h; sourceTree = "<group>"; };
+		65F00F1E191958EC000657CB /* DTIGameBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTIGameBoard.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -134,6 +137,8 @@
 				65F00EFE19195515000657CB /* Spaceship.png */,
 				65F00F0019195515000657CB /* Images.xcassets */,
 				65F00EE719195514000657CB /* Supporting Files */,
+				65F00F1D191958EC000657CB /* DTIGameBoard.h */,
+				65F00F1E191958EC000657CB /* DTIGameBoard.m */,
 			);
 			path = TicTacToe;
 			sourceTree = "<group>";
@@ -271,6 +276,7 @@
 				65F00EF119195514000657CB /* DTIAppDelegate.m in Sources */,
 				65F00EED19195514000657CB /* main.m in Sources */,
 				65F00EFA19195514000657CB /* DTIViewController.m in Sources */,
+				65F00F1F191958EC000657CB /* DTIGameBoard.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

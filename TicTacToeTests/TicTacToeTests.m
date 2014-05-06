@@ -7,6 +7,7 @@
 //
 
 #import <XCTest/XCTest.h>
+#import "DTIGameBoard.h"
 
 @interface TicTacToeTests : XCTestCase
 
@@ -31,6 +32,30 @@
     XCTFail(@"No implementation for \"%s\"", __PRETTY_FUNCTION__);
 }
 
+-(void)testThatGameIsWon
+{
+    NSArray* rowWins = @[@"XXX------", @"---XXX---", @"------XXX"];
+    NSArray* columnWins = @[@"X--X--X--", @"-X--X--X-", @"--X--X--X"];
+    NSArray* diagonalWins = @[@"X---X---X", @"--X-X-X--"];
+
+    NSArray* allWins = [[rowWins arrayByAddingObjectsFromArray:columnWins]
+                                 arrayByAddingObjectsFromArray:diagonalWins];
+
+    for( NSString* sequence in allWins)
+    {
+        [self runTestForGameSequence:sequence];
+    }
+}
+
+-(void)runTestForGameSequence:(NSString*)sequence
+{
+    DTIGameBoard* board = [[DTIGameBoard alloc] init];
+    for( int i = 0; i < 9; ++i )
+    {
+        [board play:[sequence characterAtIndex:i] inSquare:i];
+    }
+    XCTAssertTrue([board isWon]);
+}
 
 
 @end
