@@ -1,0 +1,13 @@
+//
+//  DTIMyScene.h
+//  TicTacToe
+//
+
+//  Copyright (c) 2014 Daniel Irvine. All rights reserved.
+//
+
+#import <SpriteKit/SpriteKit.h>
+
+@interface DTIMyScene : SKScene
+
+@end
