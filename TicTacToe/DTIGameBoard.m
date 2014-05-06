@@ -7,6 +7,8 @@
 //
 
 #import "DTIGameBoard.h"
+#import "DTIComputerPlayerRule.h"
+#import "DTIWinRule.h"
 
 @implementation DTIGameBoard
 
@@ -25,8 +27,16 @@
                              @[@2,@5,@8],
                              @[@0,@4,@8],
                              @[@2,@4,@6]];
+
+        [self assignRulesInOrder];
     }
     return self;
+}
+
+// Each of these rules must be applied in this order to ensure a win or draw
+-(void)assignRulesInOrder
+{
+    _computerPlayerRules = @[[[DTIWinRule alloc] initWithGameBoard:self andSquares:_squares]];
 }
 
 -(bool)isWon
@@ -66,12 +76,6 @@
     && [_squares[one] isEqualToValue:_squares[three]];
 }
 
--(bool)twoSquaresAreEqual:(NSInteger)one
-                         :(NSInteger)two
-{
-    return _squares[one] != nil && [_squares[one] isEqualToValue:_squares[two]];
-}
-
 -(void)play:(unichar)player inSquare:(NSInteger)square
 {
     _squares[square] = @(player);
@@ -79,39 +83,12 @@
 
 -(void)playBestMove
 {
-    for( NSArray* winningTriplet in _winningTriplets )
+    for( DTIComputerPlayerRule* rule in _computerPlayerRules)
     {
-        NSNumber* move = [self tryFindEmptySpaceinSquares:[winningTriplet[0] integerValue]
-                                                         :[winningTriplet[1] integerValue]
-                                                         :[winningTriplet[2] integerValue]];
-
-        if( move != nil )
-        {
-            NSNumber* player = move == winningTriplet[0] ? winningTriplet[1] : winningTriplet[0];
-
-            if( player == _player )
-            {
-                _squares[[move integerValue]] = _player;
-                break;
-            }
-        }
+        if( [rule tryPlay] )
+            break;
     }
+
 }
 
--(NSNumber*)tryFindEmptySpaceinSquares:(NSInteger)one
-                                    :(NSInteger)two
-                                    :(NSInteger)three
-{
-    if(_squares[three] == nil
-       && [self twoSquaresAreEqual:one :two] )
-        return @(three);
-    else if(_squares[one] == nil
-            && [self twoSquaresAreEqual:two:three] )
-        return @(one);
-    else if(_squares[two] == nil
-            && [self twoSquaresAreEqual:one:three] )
-        return @(two);
-
-    return nil;
-}
 @end

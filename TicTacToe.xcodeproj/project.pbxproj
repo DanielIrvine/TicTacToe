@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		655D9DD619199B02003A73E9 /* DTIComputerPlayerRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 655D9DD519199B02003A73E9 /* DTIComputerPlayerRule.m */; };
+		655D9DD919199BC0003A73E9 /* DTIWinRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 655D9DD819199BC0003A73E9 /* DTIWinRule.m */; };
 		65F00EDF19195514000657CB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65F00EDE19195514000657CB /* Foundation.framework */; };
 		65F00EE119195514000657CB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65F00EE019195514000657CB /* CoreGraphics.framework */; };
 		65F00EE319195514000657CB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65F00EE219195514000657CB /* UIKit.framework */; };
@@ -40,6 +42,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		655D9DD419199B02003A73E9 /* DTIComputerPlayerRule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTIComputerPlayerRule.h; sourceTree = "<group>"; };
+		655D9DD519199B02003A73E9 /* DTIComputerPlayerRule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTIComputerPlayerRule.m; sourceTree = "<group>"; };
+		655D9DD719199BC0003A73E9 /* DTIWinRule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTIWinRule.h; sourceTree = "<group>"; };
+		655D9DD819199BC0003A73E9 /* DTIWinRule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTIWinRule.m; sourceTree = "<group>"; };
 		65F00EDB19195514000657CB /* TicTacToe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TicTacToe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		65F00EDE19195514000657CB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		65F00EE019195514000657CB /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -95,6 +101,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		655D9DD319199ADA003A73E9 /* ComputerPlayerRules */ = {
+			isa = PBXGroup;
+			children = (
+				655D9DD419199B02003A73E9 /* DTIComputerPlayerRule.h */,
+				655D9DD519199B02003A73E9 /* DTIComputerPlayerRule.m */,
+				655D9DD719199BC0003A73E9 /* DTIWinRule.h */,
+				655D9DD819199BC0003A73E9 /* DTIWinRule.m */,
+			);
+			name = ComputerPlayerRules;
+			sourceTree = "<group>";
+		};
 		65F00ED219195514000657CB = {
 			isa = PBXGroup;
 			children = (
@@ -129,6 +146,7 @@
 		65F00EE619195514000657CB /* TicTacToe */ = {
 			isa = PBXGroup;
 			children = (
+				655D9DD319199ADA003A73E9 /* ComputerPlayerRules */,
 				65F00EEF19195514000657CB /* DTIAppDelegate.h */,
 				65F00EF019195514000657CB /* DTIAppDelegate.m */,
 				65F00EF219195514000657CB /* Main_iPhone.storyboard */,
@@ -280,7 +298,9 @@
 				65F00EFD19195515000657CB /* DTIMyScene.m in Sources */,
 				65F00EF119195514000657CB /* DTIAppDelegate.m in Sources */,
 				65F00EED19195514000657CB /* main.m in Sources */,
+				655D9DD619199B02003A73E9 /* DTIComputerPlayerRule.m in Sources */,
 				65F00EFA19195514000657CB /* DTIViewController.m in Sources */,
+				655D9DD919199BC0003A73E9 /* DTIWinRule.m in Sources */,
 				65F00F1F191958EC000657CB /* DTIGameBoard.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
