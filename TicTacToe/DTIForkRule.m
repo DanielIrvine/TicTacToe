@@ -21,9 +21,7 @@
     for( NSArray* winningTriplet in _board.winningTriplets )
     {
         NSNumber* blockedSquare =
-        [self determineIfOnlyOneSquareBlockedInSquares:[winningTriplet[0] integerValue]
-                                                      :[winningTriplet[1] integerValue]
-                                                      :[winningTriplet[2] integerValue]];
+        [self determineIfOnlyOneSquareBlockedInTriplet:winningTriplet];
 
         if( blockedSquare != nil
            && _squares[blockedSquare.integerValue] == _board.player)
@@ -48,26 +46,6 @@
     }
 
     return false;
-}
-
--(NSNumber*)determineIfOnlyOneSquareBlockedInSquares:(NSInteger)one
-                                                    :(NSInteger)two
-                                                    :(NSInteger)three
-{
-    if( _squares[one] == [DTIPlayer unplayed]
-       && _squares[two] == [DTIPlayer unplayed]
-       && _squares[three] != [DTIPlayer unplayed] )
-        return @(three);
-    else if( _squares[one] == [DTIPlayer unplayed]
-            && _squares[two] != [DTIPlayer unplayed]
-            && _squares[three] == [DTIPlayer unplayed] )
-        return @(two);
-    else if( _squares[one] != [DTIPlayer unplayed]
-            && _squares[two] == [DTIPlayer unplayed]
-            && _squares[three] == [DTIPlayer unplayed] )
-        return @(one);
-
-    return nil;
 }
 
 @end

@@ -103,21 +103,21 @@
     // It's just simpler to write these out. To generate them would
     // require at least two for loops which would be confusing to read.
 
-    // Note the ones with an O need that O there otherwise X can win in one move.
-    // This isn't exactly correct as O should really have had another go but it
-    // suffices for the test.
+    // It's mainly the Xs that are important, but I've added in an O so that
+    // each game sequence is "valid". Note that some of them (like the first)
+    // would never get played by optimally-playing players
     return @[@"X---X---O",
-             @"X----X---",
-             @"X------X-",
+             @"X---OX---",
+             @"X---O--X-",
              @"X---O---X",
-             @"-X-X-----",
-             @"-X---X---",
-             @"-X----X--",
-             @"-X------X",
-             @"--XX-----",
+             @"-X-XO----",
+             @"-X--OX---",
+             @"-X--O-X--",
+             @"-X--O---X",
+             @"--XXO----",
              @"--X-X-O--",
              @"--X-O-X--",
-             @"--X----X-"];
+             @"--X-O--X-"];
 }
 
 -(NSString*)generateSequenceFromValue:(NSInteger)value

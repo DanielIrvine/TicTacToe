@@ -19,7 +19,7 @@ static DTIPlayer* kUnplayed;
 
     kX = [[DTIPlayer alloc] initWithPlayer:@"X"];
     kO = [[DTIPlayer alloc] initWithPlayer:@"O"];
-    kUnplayed = [[DTIPlayer alloc] initWithPlayer:@"0"];
+    kUnplayed = [[DTIPlayer alloc] initWithPlayer:@"-"];
 }
 
 -(id)initWithPlayer:(NSString*)player
@@ -55,6 +55,11 @@ static DTIPlayer* kUnplayed;
 }
 
 -(NSString *)description
+{
+    return _player;
+}
+
+-(NSString *)debugDescription
 {
     return _player;
 }

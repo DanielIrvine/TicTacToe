@@ -22,8 +22,12 @@
 -(bool)tryPlay;
 
 
+// The following are useful to individual subtypes
+
 -(NSNumber*)tryFindEmptySpaceInSquares:(NSInteger)one
                                       :(NSInteger)two
                                       :(NSInteger)three;
+
+-(NSNumber*)determineIfOnlyOneSquareBlockedInTriplet:(NSArray*)triplet;
 
 @end

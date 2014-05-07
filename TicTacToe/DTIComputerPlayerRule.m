@@ -7,6 +7,7 @@
 //
 
 #import "DTIComputerPlayerRule.h"
+#import "DTIBlockForkRule.h"
 #import "DTIRowOfTwoRule.h"
 #import "DTIForkRule.h"
 #import "DTIGameBoard.h"
@@ -29,7 +30,8 @@
 {
     return @[[DTIRowOfTwoRule winRuleForBoard:board andSquares:squares],
              [DTIRowOfTwoRule blockRuleForBoard:board andSquares:squares],
-             [[DTIForkRule alloc] initWithGameBoard:board andSquares:squares]];
+             [[DTIForkRule alloc] initWithGameBoard:board andSquares:squares],
+             [[DTIBlockForkRule alloc] initWithGameBoard:board andSquares:squares]];
 }
 
 -(bool)tryPlay
@@ -60,6 +62,27 @@
 {
     return _squares[one] != [DTIPlayer unplayed]
     && _squares[one] == _squares[two];
+}
+
+
+// FIXME: may be better to put these on a separate subtype
+-(NSNumber*)determineIfOnlyOneSquareBlockedInTriplet:(NSArray*)triplet
+{
+    if( [self isBlocked:triplet[0] andNotBlocked:triplet[1] :triplet[2]])
+        return triplet[0];
+    if( [self isBlocked:triplet[1] andNotBlocked:triplet[0] :triplet[2]])
+        return triplet[1];
+    if( [self isBlocked:triplet[2] andNotBlocked:triplet[0] :triplet[1]])
+        return triplet[2];
+
+    return nil;
+}
+
+-(bool)isBlocked:(NSNumber*)one andNotBlocked:(NSNumber*)two :(NSNumber*)three
+{
+    return _squares[one.integerValue] != [DTIPlayer unplayed]
+    && _squares[two.integerValue] == [DTIPlayer unplayed]
+    && _squares[three.integerValue] == [DTIPlayer unplayed];
 }
 
 @end

@@ -65,8 +65,9 @@
         [self playSequence:sequence on:board];
         [board playBestMove];
 
-        NSMutableArray* seqSplit = [self repeatLastMoveAsXInSequence:sequence
-                                                                  on:board];
+        NSMutableArray* seqSplit = [self repeatLastMoveAs:[DTIPlayer x]
+                                               inSequence:sequence
+                                                       on:board];
 
         bool wasBlocked = false;
         for( NSArray* winningTriplet in board.winningTriplets )
@@ -91,24 +92,16 @@
         [self playSequence:sequence on:board];
         [board playBestMove];
 
-        NSMutableArray* seqSplit = [self repeatLastMoveAsXInSequence:sequence
-                                                                  on:board];
+        NSMutableArray* seqSplit = [self repeatLastMoveAs:[DTIPlayer x]
+                                               inSequence:sequence
+                                                       on:board];
 
         int rowsWithTwoXs = 0;
         for( NSArray* winningTriplet in board.winningTriplets )
         {
-            int xCount = 0;
-            xCount += [self increaseIf:seqSplit[[winningTriplet[0] integerValue]]
-                               matches:[DTIPlayer x]
-                andDecreaseIfItMatches:[DTIPlayer o]];
-            xCount += [self increaseIf:seqSplit[[winningTriplet[1] integerValue]]
-                               matches:[DTIPlayer x]
-                andDecreaseIfItMatches:[DTIPlayer o]];
-            xCount += [self increaseIf:seqSplit[[winningTriplet[2] integerValue]]
-                               matches:[DTIPlayer x]
-                andDecreaseIfItMatches:[DTIPlayer o]];
-
-            if(xCount == 2)
+            if( [self thereAreTwoSquaresForPlayer:[DTIPlayer x]
+                                            inRow:winningTriplet
+                                           within:seqSplit] )
             {
                 rowsWithTwoXs++;
             }
@@ -119,12 +112,85 @@
     }
 }
 
--(NSMutableArray*)repeatLastMoveAsXInSequence:(NSString*)sequence
-                                           on:(DTIGameBoard*)board
+-(void)testWhenComputerPlayerMustBlockForkThenForkIsBlocked
+{
+    for( NSString* sequence in [_seqGen generateForkableSequences] )
+    {
+        DTIGameBoard* board = [[DTIGameBoard alloc] initWithComputerPlayerAs:[DTIPlayer o]];
+        [self playSequence:sequence on:board];
+        [board playBestMove];
+
+        NSMutableArray* seqSplit = [self repeatLastMoveAs:[DTIPlayer o]
+                                               inSequence:sequence
+                                                       on:board];
+
+        // The move has been successful if X must now move in exactly one
+        // square and making that move will not result in a fork for X
+        for( NSArray* winningTriplet in board.winningTriplets )
+        {
+            if( [self thereAreTwoSquaresForPlayer:[DTIPlayer o]
+                                            inRow:winningTriplet
+                                           within:seqSplit] )
+            {
+                // Move x into this square
+                NSInteger nextMoveForX = [[self getEmptySquareFrom:winningTriplet
+                                                       inSequence:seqSplit] integerValue];
+                seqSplit[nextMoveForX] = [DTIPlayer x];
+
+                // Check that a fork was not created
+                NSInteger validPlaysForX = 0;
+                for( NSArray* winningTripletForX in board.winningTriplets )
+                {
+                    if( [self thereAreTwoSquaresForPlayer:[DTIPlayer x]
+                                                    inRow:winningTripletForX
+                                                   within:seqSplit])
+                    {
+                        validPlaysForX++;
+                    }
+                }
+
+                XCTAssertTrue(validPlaysForX < 2);
+                return;
+            }
+        }
+
+        XCTFail(@"Player O should have had two-in-a-row but this was not found.");
+    }
+}
+
+-(NSNumber*)getEmptySquareFrom:(NSArray*)triplet inSequence:(NSArray*)sequence
+{
+    for( NSNumber* index in triplet )
+    {
+        if(sequence[index.integerValue] == [DTIPlayer unplayed])
+            return index;
+    }
+    return nil;
+}
+-(NSMutableArray*)repeatLastMoveAs:(DTIPlayer*)player
+                        inSequence:(NSString*)sequence
+                                on:(DTIGameBoard*)board
 {
     NSMutableArray* seqSplit = [self splitSequenceIntoArray:sequence];
-    seqSplit[board.lastPlayedSquare.integerValue] = [DTIPlayer x];
+    seqSplit[board.lastPlayedSquare.integerValue] = player;
     return seqSplit;
+}
+
+-(bool)thereAreTwoSquaresForPlayer:(DTIPlayer*)player
+                             inRow:(NSArray*)triplet
+                            within:(NSArray*)seqSplit
+{
+    int squareCount = 0;
+    squareCount += [self increaseIf:seqSplit[[triplet[0] integerValue]]
+                       matches:player
+        andDecreaseIfItMatches:[player opponent]];
+    squareCount += [self increaseIf:seqSplit[[triplet[1] integerValue]]
+                            matches:player
+             andDecreaseIfItMatches:[player opponent]];
+    squareCount += [self increaseIf:seqSplit[[triplet[2] integerValue]]
+                            matches:player
+             andDecreaseIfItMatches:[player opponent]];
+    return squareCount == 2;
 }
 
 -(int)increaseIf:(DTIPlayer*)squareValue
