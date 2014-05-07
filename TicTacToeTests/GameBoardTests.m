@@ -120,8 +120,6 @@
 
         }
 
-        if(rowsWithTwoXs != 2)
-            NSLog(@"%@", sequence);
         XCTAssertTrue(rowsWithTwoXs == 2);
     }
 }
