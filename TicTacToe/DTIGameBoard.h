@@ -14,7 +14,10 @@
 }
 
 @property (readonly) NSNumber* player;
+@property (readonly) NSNumber* freeSquare;
 @property (readonly) NSArray* winningTriplets;
+
+@property (readonly) NSNumber* lastBlockedSquare;
 
 -(id)initWithComputerPlayerAs:(unichar)player;
 -(bool)isWon;

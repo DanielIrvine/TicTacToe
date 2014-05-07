@@ -9,6 +9,7 @@
 #import "DTIComputerPlayerRule.h"
 #import "DTIWinRule.h"
 #import "DTIBlockRule.h"
+#import "DTIGameBoard.h"
 
 @implementation DTIComputerPlayerRule
 
@@ -39,13 +40,13 @@
                                       :(NSInteger)two
                                       :(NSInteger)three
 {
-    if(_squares[three] == nil
+    if(_squares[three] == _board.freeSquare
        && [self twoSquaresAreEqual:one :two] )
         return @(three);
-    else if(_squares[one] == nil
+    else if(_squares[one] == _board.freeSquare
             && [self twoSquaresAreEqual:two:three] )
         return @(one);
-    else if(_squares[two] == nil
+    else if(_squares[two] == _board.freeSquare
             && [self twoSquaresAreEqual:one:three] )
         return @(two);
 
@@ -55,7 +56,8 @@
 -(bool)twoSquaresAreEqual:(NSInteger)one
                          :(NSInteger)two
 {
-    return _squares[one] != nil && [_squares[one] isEqualToValue:_squares[two]];
+    return _squares[one] != _board.freeSquare
+    && [_squares[one] isEqualToValue:_squares[two]];
 }
 
 @end

@@ -17,7 +17,11 @@
 {
     if(self = [super init])
     {
+        _freeSquare = [NSNumber numberWithChar:'-'];
         _squares = [[NSMutableArray alloc] initWithCapacity:9];
+        for (NSInteger i = 0; i < 9; i++) {
+            [_squares insertObject:_freeSquare atIndex:i];
+        }
         _player = @(player);
 
         _winningTriplets = @[@[@0,@1,@2],
@@ -60,7 +64,7 @@
 -(bool)noSquaresEmpty
 {
     for(int i = 0; i < 9; ++i)
-        if(_squares[i] == nil)
+        if(_squares[i] == _freeSquare)
             return false;
 
     return true;
@@ -70,7 +74,7 @@
                            :(NSInteger)two
                            :(NSInteger)three
 {
-    return _squares[one] != nil
+    return _squares[one] != _freeSquare
     && [_squares[one] isEqualToValue:_squares[two]]
     && [_squares[one] isEqualToValue:_squares[three]];
 }
@@ -78,6 +82,7 @@
 -(void)play:(unichar)player inSquare:(NSInteger)square
 {
     _squares[square] = @(player);
+    _lastBlockedSquare = @(square);
 }
 
 -(void)playBestMove

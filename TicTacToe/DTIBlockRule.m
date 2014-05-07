@@ -32,12 +32,12 @@
                 // FIXME: fix this interface to pass the NSNumber
                 [_board play:[_board.player charValue]
                     inSquare:[move integerValue]];
-                break;
+                return true;
             }
         }
     }
     
-    return true;
+    return false;
 }
 
 @end

@@ -38,25 +38,31 @@
                     {
                         [_board play:[_board.player charValue]
                             inSquare:[square integerValue]];
-                        break;
+                        return true;
                     }
                 }
             }
         }
     }
 
-    return true;
+    return false;
 }
 
 -(NSNumber*)determineIfOnlyOneSquareBlockedInSquares:(NSInteger)one
                                                     :(NSInteger)two
                                                     :(NSInteger)three
 {
-    if( _squares[one] == nil && _squares[two] == nil && _squares[three] != nil )
+    if( _squares[one] == _board.freeSquare
+       && _squares[two] == _board.freeSquare
+       && _squares[three] != _board.freeSquare )
         return @(three);
-    else if( _squares[one] == nil && _squares[two] != nil && _squares[three] == nil )
+    else if( _squares[one] == _board.freeSquare
+            && _squares[two] != _board.freeSquare
+            && _squares[three] == _board.freeSquare )
         return @(two);
-    else if( _squares[one] != nil && _squares[two] == nil && _squares[three] == nil )
+    else if( _squares[one] != _board.freeSquare
+            && _squares[two] == _board.freeSquare
+            && _squares[three] == _board.freeSquare )
         return @(one);
 
     return nil;

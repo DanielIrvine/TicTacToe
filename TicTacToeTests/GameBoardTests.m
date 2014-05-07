@@ -52,7 +52,6 @@
         DTIGameBoard* board = [[DTIGameBoard alloc] initWithComputerPlayerAs:'X'];
         [self playSequence:sequence on:board];
         [board playBestMove];
-        // FIXME: test currently broken
         XCTAssertTrue([board isWon]);
     }
 }
@@ -64,9 +63,25 @@
         DTIGameBoard* board = [[DTIGameBoard alloc] initWithComputerPlayerAs:'O'];
         [self playSequence:sequence on:board];
         [board playBestMove];
-        // FIXME: test currently broken
-        XCTAssertTrue([board isWon]);
 
+        // TODO: possibly move some of this logic out
+        NSArray* whatIf = [self blockSquare:[board.lastBlockedSquare integerValue]
+                                 inSequence:sequence];
+
+        bool wasBlocked = false;
+        NSNumber* otherPlayer = [NSNumber numberWithChar:'X'];
+        for( NSArray* winningTriplet in board.winningTriplets )
+        {
+            // TODO: simplify this somehow
+            if( [whatIf[[winningTriplet[0] integerValue]] isEqualToValue:otherPlayer]
+               && [whatIf[[winningTriplet[1] integerValue]] isEqualToValue:otherPlayer]
+               && [whatIf[[winningTriplet[2] integerValue]] isEqualToValue:otherPlayer] )
+            {
+                wasBlocked = true;
+                break;
+            }
+        }
+        XCTAssertTrue(wasBlocked);
     }
 }
 
@@ -78,7 +93,7 @@
         [self playSequence:sequence on:board];
         [board playBestMove];
 
-        // TODO: what to test here..
+        // TODO: what to test here....search for two X-X patterns
     }
 }
 
@@ -87,9 +102,25 @@
 {
     for( int i = 0; i < 9; ++i )
     {
-        [board play:[sequence characterAtIndex:i] inSquare:i];
+        unichar c = [sequence characterAtIndex:i];
+        if( c != '-' )
+        {
+            [board play:c inSquare:i];
+        }
     }
 }
 
+// @remarks This not only blocks but changes the output type
+// It's also not very clear that it'll insert a 'O', maybe that should be a parameter
+-(NSArray*)blockSquare:(NSInteger)square inSequence:(NSString*)sequence
+{
+    NSMutableArray* sequenceArray = [[NSMutableArray alloc] init];
+    for( int i = 0; i < 9; ++i )
+    {
+        if( i == square ) [sequenceArray addObject:[NSNumber numberWithChar:'X']];
+        else [sequenceArray addObject:[NSNumber numberWithChar:[sequence characterAtIndex:i]]];
+    }
+    return sequenceArray;
+}
 
 @end

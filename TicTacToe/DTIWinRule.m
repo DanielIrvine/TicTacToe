@@ -28,12 +28,12 @@
             {
                 [_board play:[_board.player charValue]
                     inSquare:[move integerValue]];
-                break;
+                return true;
             }
         }
     }
 
-    return true;
+    return false;
 }
 
 
