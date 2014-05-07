@@ -25,12 +25,13 @@
 
         if( move != nil )
         {
-            NSNumber* player = move == winningTriplet[0] ? winningTriplet[1] : winningTriplet[0];
+            DTIPlayer* player = move == winningTriplet[0]
+            ? _squares[[winningTriplet[1] integerValue]]
+            : _squares[[winningTriplet[0] integerValue]];
 
             if( player != _board.player )
             {
-                // FIXME: fix this interface to pass the NSNumber
-                [_board play:[_board.player charValue]
+                [_board play:_board.player
                     inSquare:[move integerValue]];
                 return true;
             }

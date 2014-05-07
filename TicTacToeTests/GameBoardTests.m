@@ -9,6 +9,7 @@
 #import <XCTest/XCTest.h>
 #import "DTIGameBoard.h"
 #import "DTISequenceGenerator.h"
+#import "DTIPlayer.h"
 
 @interface GameBoardTests : XCTestCase
 {
@@ -29,7 +30,7 @@
 {
     for( NSString* sequence in [_seqGen generateAllWinningSequences])
     {
-        DTIGameBoard* board = [[DTIGameBoard alloc] initWithComputerPlayerAs:'X'];
+        DTIGameBoard* board = [[DTIGameBoard alloc] initWithComputerPlayerAs:[DTIPlayer x]];
         [self playSequence:sequence on:board];
         XCTAssertTrue([board isWon]);
     }
@@ -39,7 +40,7 @@
 {
     for( NSString* sequence in [_seqGen generateDrawSequences])
     {
-        DTIGameBoard* board = [[DTIGameBoard alloc] initWithComputerPlayerAs:'X'];
+        DTIGameBoard* board = [[DTIGameBoard alloc] initWithComputerPlayerAs:[DTIPlayer x]];
         [self playSequence:sequence on:board];
         XCTAssertTrue([board isDrawn]);
     }
@@ -49,7 +50,7 @@
 {
     for( NSString* sequence in [_seqGen generateOneMoveFromWinningSequences])
     {
-        DTIGameBoard* board = [[DTIGameBoard alloc] initWithComputerPlayerAs:'X'];
+        DTIGameBoard* board = [[DTIGameBoard alloc] initWithComputerPlayerAs:[DTIPlayer x]];
         [self playSequence:sequence on:board];
         [board playBestMove];
         XCTAssertTrue([board isWon]);
@@ -60,22 +61,21 @@
 {
     for( NSString* sequence in [_seqGen generateOneMoveFromWinningSequences])
     {
-        DTIGameBoard* board = [[DTIGameBoard alloc] initWithComputerPlayerAs:'O'];
+        DTIGameBoard* board = [[DTIGameBoard alloc] initWithComputerPlayerAs:[DTIPlayer o]];
         [self playSequence:sequence on:board];
         [board playBestMove];
 
         // TODO: possibly move some of this logic out
         NSMutableArray* seqSplit = [self splitSequenceIntoArray:sequence];
-        seqSplit[board.lastBlockedSquare.integerValue] = [NSNumber numberWithChar:'X'];
+        seqSplit[board.lastBlockedSquare.integerValue] = [DTIPlayer x];
 
         bool wasBlocked = false;
-        NSNumber* otherPlayer = [NSNumber numberWithChar:'X'];
         for( NSArray* winningTriplet in board.winningTriplets )
         {
             // TODO: simplify this somehow
-            if( [seqSplit[[winningTriplet[0] integerValue]] isEqualToValue:otherPlayer]
-               && [seqSplit[[winningTriplet[1] integerValue]] isEqualToValue:otherPlayer]
-               && [seqSplit[[winningTriplet[2] integerValue]] isEqualToValue:otherPlayer] )
+            if( seqSplit[[winningTriplet[0] integerValue]] == [DTIPlayer x]
+               && seqSplit[[winningTriplet[1] integerValue]] == [DTIPlayer x]
+               && seqSplit[[winningTriplet[2] integerValue]] == [DTIPlayer x] )
             {
                 wasBlocked = true;
                 break;
@@ -89,29 +89,28 @@
 {
     for( NSString* sequence in [_seqGen generateForkableSequences])
     {
-        DTIGameBoard* board = [[DTIGameBoard alloc] initWithComputerPlayerAs:'X'];
+        DTIGameBoard* board = [[DTIGameBoard alloc] initWithComputerPlayerAs:[DTIPlayer x]];
         [self playSequence:sequence on:board];
         [board playBestMove];
 
         // FIXME: repeated code from previous test
         NSMutableArray* seqSplit = [self splitSequenceIntoArray:sequence];
-        seqSplit[board.lastBlockedSquare.integerValue] = [NSNumber numberWithChar:'X'];
+        seqSplit[board.lastBlockedSquare.integerValue] = [DTIPlayer x];
 
         // TODO: save off this other player in the board somehow
-        NSNumber* otherPlayer = [NSNumber numberWithChar:'O'];
         int rowsWithTwoXs = 0;
         for( NSArray* winningTriplet in board.winningTriplets )
         {
             int xCount = 0;
             xCount += [self increaseIf:seqSplit[[winningTriplet[0] integerValue]]
-                               matches:board.player
-                andDecreaseIfItMatches:otherPlayer];
+                               matches:[DTIPlayer x]
+                andDecreaseIfItMatches:[DTIPlayer o]];
             xCount += [self increaseIf:seqSplit[[winningTriplet[1] integerValue]]
-                               matches:board.player
-                andDecreaseIfItMatches:otherPlayer];
+                               matches:[DTIPlayer x]
+                andDecreaseIfItMatches:[DTIPlayer o]];
             xCount += [self increaseIf:seqSplit[[winningTriplet[2] integerValue]]
-                               matches:board.player
-                andDecreaseIfItMatches:otherPlayer];
+                               matches:[DTIPlayer x]
+                andDecreaseIfItMatches:[DTIPlayer o]];
 
             if(xCount == 2)
             {
@@ -124,12 +123,12 @@
     }
 }
 
--(int)increaseIf:(NSNumber*)squareValue
-       matches:(NSNumber*)player
-andDecreaseIfItMatches:(NSNumber*)otherPlayer
+-(int)increaseIf:(DTIPlayer*)squareValue
+       matches:(DTIPlayer*)player
+andDecreaseIfItMatches:(DTIPlayer*)otherPlayer
 {
-    if([squareValue isEqualToNumber:player]) return 1;
-    if([squareValue isEqualToNumber:otherPlayer]) return -1;
+    if(squareValue == player) return 1;
+    if(squareValue == otherPlayer) return -1;
     return 0;
 }
 
@@ -140,7 +139,7 @@ andDecreaseIfItMatches:(NSNumber*)otherPlayer
         unichar c = [sequence characterAtIndex:i];
         if( c != '-' )
         {
-            [board play:c inSquare:i];
+            [board play:[self getPlayerForCharacter:c] inSquare:i];
         }
     }
 }
@@ -150,9 +149,22 @@ andDecreaseIfItMatches:(NSNumber*)otherPlayer
     NSMutableArray* sequenceArray = [[NSMutableArray alloc] init];
     for( int i = 0; i < 9; ++i )
     {
-        [sequenceArray addObject:[NSNumber numberWithChar:[sequence characterAtIndex:i]]];
+        [sequenceArray addObject:[self getPlayerForCharacter:[sequence characterAtIndex:i]]];
     }
     return sequenceArray;
+}
+
+-(DTIPlayer*)getPlayerForCharacter:(unichar)character
+{
+    switch(character)
+    {
+        case 'X':
+            return [DTIPlayer x];
+        case 'O':
+            return [DTIPlayer o];
+        default:
+            return [DTIPlayer unplayed];
+    }
 }
 
 @end

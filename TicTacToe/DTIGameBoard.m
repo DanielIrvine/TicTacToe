@@ -10,19 +10,19 @@
 #import "DTIComputerPlayerRule.h"
 #import "DTIWinRule.h"
 #import "DTIBlockRule.h"
+#import "DTIPlayer.h"
 
 @implementation DTIGameBoard
 
--(id)initWithComputerPlayerAs:(unichar)player
+-(id)initWithComputerPlayerAs:(DTIPlayer*)player
 {
     if(self = [super init])
     {
-        _freeSquare = [NSNumber numberWithChar:'-'];
         _squares = [[NSMutableArray alloc] initWithCapacity:9];
         for (NSInteger i = 0; i < 9; i++) {
-            [_squares insertObject:_freeSquare atIndex:i];
+            [_squares insertObject:[DTIPlayer unplayed] atIndex:i];
         }
-        _player = @(player);
+        _player = player;
 
         _winningTriplets = @[@[@0,@1,@2],
                              @[@3,@4,@5],
@@ -47,7 +47,7 @@
                                       :[winningTriplet[1] integerValue]
                                       :[winningTriplet[2] integerValue]])
         {
-            if( [_squares[[winningTriplet[0] integerValue]] isEqualToValue:_player] )
+            if( _squares[[winningTriplet[0] integerValue]] == _player )
             {
                 return true;
             }
@@ -64,7 +64,7 @@
 -(bool)noSquaresEmpty
 {
     for(int i = 0; i < 9; ++i)
-        if(_squares[i] == _freeSquare)
+        if(_squares[i] == [DTIPlayer unplayed])
             return false;
 
     return true;
@@ -74,14 +74,14 @@
                            :(NSInteger)two
                            :(NSInteger)three
 {
-    return _squares[one] != _freeSquare
-    && [_squares[one] isEqualToValue:_squares[two]]
-    && [_squares[one] isEqualToValue:_squares[three]];
+    return _squares[one] != [DTIPlayer unplayed]
+    && _squares[one] == _squares[two]
+    && _squares[one] == _squares[three];
 }
 
--(void)play:(unichar)player inSquare:(NSInteger)square
+-(void)play:(DTIPlayer*)player inSquare:(NSInteger)square
 {
-    _squares[square] = @(player);
+    _squares[square] = player;
     _lastBlockedSquare = @(square);
 }
 

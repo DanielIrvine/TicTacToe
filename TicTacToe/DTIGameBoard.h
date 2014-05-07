@@ -8,21 +8,22 @@
 
 #import <Foundation/Foundation.h>
 
+@class DTIPlayer;
+
 @interface DTIGameBoard : NSObject {
     NSMutableArray* _squares;
     NSArray* _computerPlayerRules;
 }
 
-@property (readonly) NSNumber* player;
-@property (readonly) NSNumber* freeSquare;
+@property (readonly) DTIPlayer* player;
 @property (readonly) NSArray* winningTriplets;
 
 @property (readonly) NSNumber* lastBlockedSquare;
 
--(id)initWithComputerPlayerAs:(unichar)player;
+-(id)initWithComputerPlayerAs:(DTIPlayer*)player;
 -(bool)isWon;
 -(bool)isDrawn;
 -(void)playBestMove;
 
--(void)play:(unichar)player inSquare:(NSInteger)square;
+-(void)play:(DTIPlayer*)player inSquare:(NSInteger)square;
 @end

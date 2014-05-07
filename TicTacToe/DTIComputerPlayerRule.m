@@ -11,6 +11,7 @@
 #import "DTIBlockRule.h"
 #import "DTIForkRule.h"
 #import "DTIGameBoard.h"
+#import "DTIPlayer.h"
 
 @implementation DTIComputerPlayerRule
 
@@ -42,13 +43,13 @@
                                       :(NSInteger)two
                                       :(NSInteger)three
 {
-    if(_squares[three] == _board.freeSquare
+    if(_squares[three] == [DTIPlayer unplayed]
        && [self twoSquaresAreEqual:one :two] )
         return @(three);
-    else if(_squares[one] == _board.freeSquare
+    else if(_squares[one] == [DTIPlayer unplayed]
             && [self twoSquaresAreEqual:two:three] )
         return @(one);
-    else if(_squares[two] == _board.freeSquare
+    else if(_squares[two] == [DTIPlayer unplayed]
             && [self twoSquaresAreEqual:one:three] )
         return @(two);
 
@@ -58,8 +59,8 @@
 -(bool)twoSquaresAreEqual:(NSInteger)one
                          :(NSInteger)two
 {
-    return _squares[one] != _board.freeSquare
-    && [_squares[one] isEqualToValue:_squares[two]];
+    return _squares[one] != [DTIPlayer unplayed]
+    && _squares[one] == _squares[two];
 }
 
 @end

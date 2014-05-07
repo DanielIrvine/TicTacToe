@@ -11,6 +11,7 @@
 
 #import "DTIForkRule.h"
 #import "DTIGameBoard.h"
+#import "DTIPlayer.h"
 
 @implementation DTIForkRule
 
@@ -25,7 +26,7 @@
                                                       :[winningTriplet[2] integerValue]];
 
         if( blockedSquare != nil
-           && [_squares[blockedSquare.integerValue] isEqualToValue:_board.player])
+           && _squares[blockedSquare.integerValue] == _board.player)
         {
             for( NSNumber* square in winningTriplet )
             {
@@ -37,7 +38,7 @@
 
                     if( counts[index] == 2 )
                     {
-                        [_board play:[_board.player charValue]
+                        [_board play:_board.player
                             inSquare:[square integerValue]];
                         return true;
                     }
@@ -53,17 +54,17 @@
                                                     :(NSInteger)two
                                                     :(NSInteger)three
 {
-    if( _squares[one] == _board.freeSquare
-       && _squares[two] == _board.freeSquare
-       && _squares[three] != _board.freeSquare )
+    if( _squares[one] == [DTIPlayer unplayed]
+       && _squares[two] == [DTIPlayer unplayed]
+       && _squares[three] != [DTIPlayer unplayed] )
         return @(three);
-    else if( _squares[one] == _board.freeSquare
-            && _squares[two] != _board.freeSquare
-            && _squares[three] == _board.freeSquare )
+    else if( _squares[one] == [DTIPlayer unplayed]
+            && _squares[two] != [DTIPlayer unplayed]
+            && _squares[three] == [DTIPlayer unplayed] )
         return @(two);
-    else if( _squares[one] != _board.freeSquare
-            && _squares[two] == _board.freeSquare
-            && _squares[three] == _board.freeSquare )
+    else if( _squares[one] != [DTIPlayer unplayed]
+            && _squares[two] == [DTIPlayer unplayed]
+            && _squares[three] == [DTIPlayer unplayed] )
         return @(one);
 
     return nil;
