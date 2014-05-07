@@ -65,14 +65,12 @@
         [self playSequence:sequence on:board];
         [board playBestMove];
 
-        // TODO: possibly move some of this logic out
-        NSMutableArray* seqSplit = [self splitSequenceIntoArray:sequence];
-        seqSplit[board.lastBlockedSquare.integerValue] = [DTIPlayer x];
+        NSMutableArray* seqSplit = [self repeatLastMoveAsXInSequence:sequence
+                                                                  on:board];
 
         bool wasBlocked = false;
         for( NSArray* winningTriplet in board.winningTriplets )
         {
-            // TODO: simplify this somehow
             if( seqSplit[[winningTriplet[0] integerValue]] == [DTIPlayer x]
                && seqSplit[[winningTriplet[1] integerValue]] == [DTIPlayer x]
                && seqSplit[[winningTriplet[2] integerValue]] == [DTIPlayer x] )
@@ -93,11 +91,9 @@
         [self playSequence:sequence on:board];
         [board playBestMove];
 
-        // FIXME: repeated code from previous test
-        NSMutableArray* seqSplit = [self splitSequenceIntoArray:sequence];
-        seqSplit[board.lastBlockedSquare.integerValue] = [DTIPlayer x];
+        NSMutableArray* seqSplit = [self repeatLastMoveAsXInSequence:sequence
+                                                                  on:board];
 
-        // TODO: save off this other player in the board somehow
         int rowsWithTwoXs = 0;
         for( NSArray* winningTriplet in board.winningTriplets )
         {
@@ -121,6 +117,14 @@
 
         XCTAssertTrue(rowsWithTwoXs == 2);
     }
+}
+
+-(NSMutableArray*)repeatLastMoveAsXInSequence:(NSString*)sequence
+                                           on:(DTIGameBoard*)board
+{
+    NSMutableArray* seqSplit = [self splitSequenceIntoArray:sequence];
+    seqSplit[board.lastPlayedSquare.integerValue] = [DTIPlayer x];
+    return seqSplit;
 }
 
 -(int)increaseIf:(DTIPlayer*)squareValue

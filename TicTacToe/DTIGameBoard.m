@@ -81,7 +81,7 @@
 -(void)play:(DTIPlayer*)player inSquare:(NSInteger)square
 {
     _squares[square] = player;
-    _lastBlockedSquare = @(square);
+    _lastPlayedSquare = @(square);
 }
 
 -(void)playBestMove

@@ -18,7 +18,7 @@
 @property (readonly) DTIPlayer* player;
 @property (readonly) NSArray* winningTriplets;
 
-@property (readonly) NSNumber* lastBlockedSquare;
+@property (readonly) NSNumber* lastPlayedSquare;
 
 -(id)initWithComputerPlayerAs:(DTIPlayer*)player;
 -(bool)isWon;
