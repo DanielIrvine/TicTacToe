@@ -24,7 +24,8 @@
                                                       :[winningTriplet[1] integerValue]
                                                       :[winningTriplet[2] integerValue]];
 
-        if( blockedSquare != nil )
+        if( blockedSquare != nil
+           && [_squares[blockedSquare.integerValue] isEqualToValue:_board.player])
         {
             for( NSNumber* square in winningTriplet )
             {

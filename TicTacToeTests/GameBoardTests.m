@@ -65,17 +65,17 @@
         [board playBestMove];
 
         // TODO: possibly move some of this logic out
-        NSArray* whatIf = [self blockSquare:[board.lastBlockedSquare integerValue]
-                                 inSequence:sequence];
+        NSMutableArray* seqSplit = [self splitSequenceIntoArray:sequence];
+        seqSplit[board.lastBlockedSquare.integerValue] = [NSNumber numberWithChar:'X'];
 
         bool wasBlocked = false;
         NSNumber* otherPlayer = [NSNumber numberWithChar:'X'];
         for( NSArray* winningTriplet in board.winningTriplets )
         {
             // TODO: simplify this somehow
-            if( [whatIf[[winningTriplet[0] integerValue]] isEqualToValue:otherPlayer]
-               && [whatIf[[winningTriplet[1] integerValue]] isEqualToValue:otherPlayer]
-               && [whatIf[[winningTriplet[2] integerValue]] isEqualToValue:otherPlayer] )
+            if( [seqSplit[[winningTriplet[0] integerValue]] isEqualToValue:otherPlayer]
+               && [seqSplit[[winningTriplet[1] integerValue]] isEqualToValue:otherPlayer]
+               && [seqSplit[[winningTriplet[2] integerValue]] isEqualToValue:otherPlayer] )
             {
                 wasBlocked = true;
                 break;
@@ -93,10 +93,47 @@
         [self playSequence:sequence on:board];
         [board playBestMove];
 
-        // TODO: what to test here....search for two X-X patterns
+        // FIXME: repeated code from previous test
+        NSMutableArray* seqSplit = [self splitSequenceIntoArray:sequence];
+        seqSplit[board.lastBlockedSquare.integerValue] = [NSNumber numberWithChar:'X'];
+
+        // TODO: save off this other player in the board somehow
+        NSNumber* otherPlayer = [NSNumber numberWithChar:'O'];
+        int rowsWithTwoXs = 0;
+        for( NSArray* winningTriplet in board.winningTriplets )
+        {
+            int xCount = 0;
+            xCount += [self increaseIf:seqSplit[[winningTriplet[0] integerValue]]
+                               matches:board.player
+                andDecreaseIfItMatches:otherPlayer];
+            xCount += [self increaseIf:seqSplit[[winningTriplet[1] integerValue]]
+                               matches:board.player
+                andDecreaseIfItMatches:otherPlayer];
+            xCount += [self increaseIf:seqSplit[[winningTriplet[2] integerValue]]
+                               matches:board.player
+                andDecreaseIfItMatches:otherPlayer];
+
+            if(xCount == 2)
+            {
+                rowsWithTwoXs++;
+            }
+
+        }
+
+        if(rowsWithTwoXs != 2)
+            NSLog(@"%@", sequence);
+        XCTAssertTrue(rowsWithTwoXs == 2);
     }
 }
 
+-(int)increaseIf:(NSNumber*)squareValue
+       matches:(NSNumber*)player
+andDecreaseIfItMatches:(NSNumber*)otherPlayer
+{
+    if([squareValue isEqualToNumber:player]) return 1;
+    if([squareValue isEqualToNumber:otherPlayer]) return -1;
+    return 0;
+}
 
 -(void)playSequence:(NSString*)sequence on:(DTIGameBoard*)board
 {
@@ -110,15 +147,12 @@
     }
 }
 
-// @remarks This not only blocks but changes the output type
-// It's also not very clear that it'll insert a 'O', maybe that should be a parameter
--(NSArray*)blockSquare:(NSInteger)square inSequence:(NSString*)sequence
+-(NSMutableArray*)splitSequenceIntoArray:(NSString*)sequence
 {
     NSMutableArray* sequenceArray = [[NSMutableArray alloc] init];
     for( int i = 0; i < 9; ++i )
     {
-        if( i == square ) [sequenceArray addObject:[NSNumber numberWithChar:'X']];
-        else [sequenceArray addObject:[NSNumber numberWithChar:[sequence characterAtIndex:i]]];
+        [sequenceArray addObject:[NSNumber numberWithChar:[sequence characterAtIndex:i]]];
     }
     return sequenceArray;
 }

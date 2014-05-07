@@ -9,6 +9,7 @@
 #import "DTIComputerPlayerRule.h"
 #import "DTIWinRule.h"
 #import "DTIBlockRule.h"
+#import "DTIForkRule.h"
 #import "DTIGameBoard.h"
 
 @implementation DTIComputerPlayerRule
@@ -27,7 +28,8 @@
 +(NSArray*)buildAllWithGameBoard:(DTIGameBoard*)board andSquares:(NSArray*)squares
 {
     return @[[[DTIWinRule alloc] initWithGameBoard:board andSquares:squares],
-             [[DTIBlockRule alloc] initWithGameBoard:board andSquares:squares]];
+             [[DTIBlockRule alloc] initWithGameBoard:board andSquares:squares],
+             [[DTIForkRule alloc] initWithGameBoard:board andSquares:squares]];
 }
 
 -(bool)tryPlay

@@ -102,17 +102,21 @@
 {
     // It's just simpler to write these out. To generate them would
     // require at least two for loops which would be confusing to read.
-    return @[@"X---X----",
+
+    // Note the ones with an O need that O there otherwise X can win in one move.
+    // This isn't exactly correct as O should really have had another go but it
+    // suffices for the test.
+    return @[@"X---X---O",
              @"X----X---",
              @"X------X-",
-             @"X-------X",
+             @"X---O---X",
              @"-X-X-----",
              @"-X---X---",
              @"-X----X--",
              @"-X------X",
              @"--XX-----",
-             @"--X-X----",
-             @"--X---X--",
+             @"--X-X-O--",
+             @"--X-O-X--",
              @"--X----X-"];
 }
 
