@@ -13,8 +13,11 @@
 }
 
 -(id)initWithPlayer:(NSString*)player;
+-(DTIPlayer*)opponent;
+
 +(DTIPlayer*)x;
 +(DTIPlayer*)o;
 +(DTIPlayer*)unplayed;
+
 
 @end

@@ -8,8 +8,7 @@
 
 #import "DTIGameBoard.h"
 #import "DTIComputerPlayerRule.h"
-#import "DTIWinRule.h"
-#import "DTIBlockRule.h"
+#import "DTIRowOfTwoRule.h"
 #import "DTIPlayer.h"
 
 @implementation DTIGameBoard

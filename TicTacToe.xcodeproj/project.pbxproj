@@ -8,8 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		655D9DD619199B02003A73E9 /* DTIComputerPlayerRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 655D9DD519199B02003A73E9 /* DTIComputerPlayerRule.m */; };
-		655D9DD919199BC0003A73E9 /* DTIWinRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 655D9DD819199BC0003A73E9 /* DTIWinRule.m */; };
-		655D9DDC19199E72003A73E9 /* DTIBlockRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 655D9DDB19199E72003A73E9 /* DTIBlockRule.m */; };
+		655D9DD919199BC0003A73E9 /* DTIRowOfTwoRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 655D9DD819199BC0003A73E9 /* DTIRowOfTwoRule.m */; };
 		655D9DDF1919A0C8003A73E9 /* DTIForkRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 655D9DDE1919A0C8003A73E9 /* DTIForkRule.m */; };
 		659E364C191A737800F464AE /* DTIPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 659E364B191A737800F464AE /* DTIPlayer.m */; };
 		65F00EDF19195514000657CB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65F00EDE19195514000657CB /* Foundation.framework */; };
@@ -47,10 +46,8 @@
 /* Begin PBXFileReference section */
 		655D9DD419199B02003A73E9 /* DTIComputerPlayerRule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTIComputerPlayerRule.h; sourceTree = "<group>"; };
 		655D9DD519199B02003A73E9 /* DTIComputerPlayerRule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTIComputerPlayerRule.m; sourceTree = "<group>"; };
-		655D9DD719199BC0003A73E9 /* DTIWinRule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTIWinRule.h; sourceTree = "<group>"; };
-		655D9DD819199BC0003A73E9 /* DTIWinRule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTIWinRule.m; sourceTree = "<group>"; };
-		655D9DDA19199E72003A73E9 /* DTIBlockRule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTIBlockRule.h; sourceTree = "<group>"; };
-		655D9DDB19199E72003A73E9 /* DTIBlockRule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTIBlockRule.m; sourceTree = "<group>"; };
+		655D9DD719199BC0003A73E9 /* DTIRowOfTwoRule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTIRowOfTwoRule.h; sourceTree = "<group>"; };
+		655D9DD819199BC0003A73E9 /* DTIRowOfTwoRule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTIRowOfTwoRule.m; sourceTree = "<group>"; };
 		655D9DDD1919A0C8003A73E9 /* DTIForkRule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTIForkRule.h; sourceTree = "<group>"; };
 		655D9DDE1919A0C8003A73E9 /* DTIForkRule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTIForkRule.m; sourceTree = "<group>"; };
 		659E364A191A737800F464AE /* DTIPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTIPlayer.h; sourceTree = "<group>"; };
@@ -115,10 +112,8 @@
 			children = (
 				655D9DD419199B02003A73E9 /* DTIComputerPlayerRule.h */,
 				655D9DD519199B02003A73E9 /* DTIComputerPlayerRule.m */,
-				655D9DD719199BC0003A73E9 /* DTIWinRule.h */,
-				655D9DD819199BC0003A73E9 /* DTIWinRule.m */,
-				655D9DDA19199E72003A73E9 /* DTIBlockRule.h */,
-				655D9DDB19199E72003A73E9 /* DTIBlockRule.m */,
+				655D9DD719199BC0003A73E9 /* DTIRowOfTwoRule.h */,
+				655D9DD819199BC0003A73E9 /* DTIRowOfTwoRule.m */,
 				655D9DDD1919A0C8003A73E9 /* DTIForkRule.h */,
 				655D9DDE1919A0C8003A73E9 /* DTIForkRule.m */,
 			);
@@ -317,8 +312,7 @@
 				659E364C191A737800F464AE /* DTIPlayer.m in Sources */,
 				65F00EFA19195514000657CB /* DTIViewController.m in Sources */,
 				655D9DDF1919A0C8003A73E9 /* DTIForkRule.m in Sources */,
-				655D9DDC19199E72003A73E9 /* DTIBlockRule.m in Sources */,
-				655D9DD919199BC0003A73E9 /* DTIWinRule.m in Sources */,
+				655D9DD919199BC0003A73E9 /* DTIRowOfTwoRule.m in Sources */,
 				65F00F1F191958EC000657CB /* DTIGameBoard.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

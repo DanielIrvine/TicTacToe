@@ -7,8 +7,7 @@
 //
 
 #import "DTIComputerPlayerRule.h"
-#import "DTIWinRule.h"
-#import "DTIBlockRule.h"
+#import "DTIRowOfTwoRule.h"
 #import "DTIForkRule.h"
 #import "DTIGameBoard.h"
 #import "DTIPlayer.h"
@@ -28,8 +27,8 @@
 // Each of these rules must be applied in this order to ensure a win or draw
 +(NSArray*)buildAllWithGameBoard:(DTIGameBoard*)board andSquares:(NSArray*)squares
 {
-    return @[[[DTIWinRule alloc] initWithGameBoard:board andSquares:squares],
-             [[DTIBlockRule alloc] initWithGameBoard:board andSquares:squares],
+    return @[[DTIRowOfTwoRule winRuleForBoard:board andSquares:squares],
+             [DTIRowOfTwoRule blockRuleForBoard:board andSquares:squares],
              [[DTIForkRule alloc] initWithGameBoard:board andSquares:squares]];
 }
 

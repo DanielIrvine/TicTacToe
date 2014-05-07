@@ -32,6 +32,13 @@ static DTIPlayer* kUnplayed;
 
 }
 
+-(DTIPlayer*)opponent
+{
+    if (self == kX ) return kO;
+    if (self == kO) return kX;
+    return nil;
+}
+
 +(DTIPlayer*)x
 {
     return kX;
