@@ -7,7 +7,7 @@
 //
 
 #import "DTIViewController.h"
-#import "DTIMyScene.h"
+#import "DTIGameScene.h"
 
 @implementation DTIViewController
 
@@ -17,11 +17,9 @@
 
     // Configure the view.
     SKView * skView = (SKView *)self.view;
-    skView.showsFPS = YES;
-    skView.showsNodeCount = YES;
-    
+
     // Create and configure the scene.
-    SKScene * scene = [DTIMyScene sceneWithSize:skView.bounds.size];
+    SKScene * scene = [DTIGameScene sceneWithSize:skView.bounds.size];
     scene.scaleMode = SKSceneScaleModeAspectFill;
     
     // Present the scene.
