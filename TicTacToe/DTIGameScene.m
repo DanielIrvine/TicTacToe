@@ -27,8 +27,7 @@ static NSString* kSquareFont = @"Chalkduster";
         [self drawTextHeadingsAndScores];
         [self drawResultLabels];
 
-        // TODO: game lifetime should be controlled outside of this class
-        _game = [[DTIGame alloc] init];
+         _game = [[DTIGame alloc] init];
         [self promptForNewGame];
     }
     return self;
@@ -36,8 +35,12 @@ static NSString* kSquareFont = @"Chalkduster";
 
 -(void)updateAfterPlay
 {
-    [self createPlayedNodeFor:_game.lastPlayer
-                           at:_game.lastPlayedSquare.integerValue];
+    for( NSNumber* square in [_game getPlaysInOrder] )
+    {
+        [self createPlayedNodeFor:_nextPlayer
+                               at:square.integerValue];
+        _nextPlayer = [_nextPlayer opponent];
+    }
 
     if( _game.isDrawn )
     {
@@ -49,7 +52,6 @@ static NSString* kSquareFont = @"Chalkduster";
         _lost.text = [@(_game.lost) stringValue];
         [self showLostResult];
     }
-
     // TODO: draw strikethrough line
 }
 
@@ -151,35 +153,32 @@ static NSString* kSquareFont = @"Chalkduster";
     {
         [node removeAllChildren];
     }
+
+    _nextPlayer = [DTIPlayer x];
+
+    [self hideResultLabels];
 }
 
--(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-
-    if( _game.isDrawn || _game.isLost )
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    if(![_game isInPlay])
     {
-        [self hideResultLabels];
         [self promptForNewGame];
     }
-    else
-    {
-        for (UITouch *touch in touches) {
-            CGPoint location = [touch locationInNode:self];
-            SKNode *node = [self nodeAtPoint:location];
+    for (UITouch *touch in touches) {
+        CGPoint location = [touch locationInNode:self];
+        SKNode *node = [self nodeAtPoint:location];
 
-            NSInteger square = [_backgroundGameNodes indexOfObject:node];
-            if( square != NSNotFound )
-            {
-                // TODO: push this into game.
-                [_game play:square];
-                [self updateAfterPlay];
-
-                if( ![_game isDrawn] && ![_game isLost])
-                {
-                    [_game playComputer];
-                    [self updateAfterPlay];
-                }
-            }
+        NSInteger square = [_backgroundGameNodes indexOfObject:node];
+        if( square != NSNotFound )
+        {
+            [_game touchIn:square];
         }
+        else
+        {
+            [_game touchOutsideSquare];
+        }
+        [self updateAfterPlay];
     }
 }
 
@@ -220,7 +219,6 @@ static NSString* kSquareFont = @"Chalkduster";
     return back;
 }
 
-// TODO: test grid system
 -(void)drawGridLines
 {
     CGFloat width = [self calculateBoardSize];
@@ -282,7 +280,6 @@ static NSString* kSquareFont = @"Chalkduster";
 
         NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
 
-        // TODO: push this into game as playFirst/playSecond
         if([title isEqualToString:@"Play second"])
         {
             [_game resetWithComputerFirst];

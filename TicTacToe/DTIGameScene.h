@@ -27,7 +27,7 @@
 
     UIAlertView* _newGameDialog;
 
-    DTIPlayer* _currentPlayer;
+    DTIPlayer* _nextPlayer;
 }
 
 @end

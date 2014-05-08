@@ -10,6 +10,7 @@
 		655D9DD619199B02003A73E9 /* DTIComputerPlayerRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 655D9DD519199B02003A73E9 /* DTIComputerPlayerRule.m */; };
 		655D9DD919199BC0003A73E9 /* DTIRowOfTwoRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 655D9DD819199BC0003A73E9 /* DTIRowOfTwoRule.m */; };
 		655D9DDF1919A0C8003A73E9 /* DTIForkRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 655D9DDE1919A0C8003A73E9 /* DTIForkRule.m */; };
+		659DF29A191B6DD60065E54C /* GameTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 659DF299191B6DD60065E54C /* GameTests.m */; };
 		659E364C191A737800F464AE /* DTIPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 659E364B191A737800F464AE /* DTIPlayer.m */; };
 		659E364F191A8ACB00F464AE /* DTIBlockForkRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 659E364E191A8ACB00F464AE /* DTIBlockForkRule.m */; };
 		659E3652191ABE7D00F464AE /* DTICenterRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 659E3651191ABE7D00F464AE /* DTICenterRule.m */; };
@@ -55,6 +56,8 @@
 		655D9DD819199BC0003A73E9 /* DTIRowOfTwoRule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTIRowOfTwoRule.m; sourceTree = "<group>"; };
 		655D9DDD1919A0C8003A73E9 /* DTIForkRule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTIForkRule.h; sourceTree = "<group>"; };
 		655D9DDE1919A0C8003A73E9 /* DTIForkRule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTIForkRule.m; sourceTree = "<group>"; };
+		659DF299191B6DD60065E54C /* GameTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameTests.m; sourceTree = "<group>"; };
+		659DF29B191B7E490065E54C /* GameBoardTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameBoardTests.h; sourceTree = "<group>"; };
 		659E364A191A737800F464AE /* DTIPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTIPlayer.h; sourceTree = "<group>"; };
 		659E364B191A737800F464AE /* DTIPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTIPlayer.m; sourceTree = "<group>"; };
 		659E364D191A8ACB00F464AE /* DTIBlockForkRule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTIBlockForkRule.h; sourceTree = "<group>"; };
@@ -215,10 +218,12 @@
 		65F00F0D19195515000657CB /* TicTacToeTests */ = {
 			isa = PBXGroup;
 			children = (
+				659DF299191B6DD60065E54C /* GameTests.m */,
 				65F00F1319195515000657CB /* GameBoardTests.m */,
 				65F00F0E19195515000657CB /* Supporting Files */,
 				65F00F20191965A0000657CB /* DTISequenceGenerator.h */,
 				65F00F21191965A0000657CB /* DTISequenceGenerator.m */,
+				659DF29B191B7E490065E54C /* GameBoardTests.h */,
 			);
 			path = TicTacToeTests;
 			sourceTree = "<group>";
@@ -354,6 +359,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				65F00F22191965A0000657CB /* DTISequenceGenerator.m in Sources */,
+				659DF29A191B6DD60065E54C /* GameTests.m in Sources */,
 				65F00F1419195515000657CB /* GameBoardTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

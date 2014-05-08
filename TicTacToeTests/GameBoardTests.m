@@ -7,16 +7,10 @@
 //
 
 #import <XCTest/XCTest.h>
+#import "GameBoardTests.h"
 #import "DTIGameBoard.h"
 #import "DTISequenceGenerator.h"
 #import "DTIPlayer.h"
-
-@interface GameBoardTests : XCTestCase
-{
-    DTISequenceGenerator* _seqGen;
-}
-
-@end
 
 @implementation GameBoardTests
 
@@ -31,7 +25,7 @@
     for( NSString* sequence in [_seqGen generateAllWinningSequences])
     {
         DTIGameBoard* board = [[DTIGameBoard alloc] initWithComputerPlayerAs:[DTIPlayer x]];
-        [self playSequence:sequence on:board];
+        [GameBoardTests playSequence:sequence on:board];
         XCTAssertTrue([board isWon]);
     }
 }
@@ -41,7 +35,7 @@
     for( NSString* sequence in [_seqGen generateDrawSequences])
     {
         DTIGameBoard* board = [[DTIGameBoard alloc] initWithComputerPlayerAs:[DTIPlayer x]];
-        [self playSequence:sequence on:board];
+        [GameBoardTests playSequence:sequence on:board];
         XCTAssertTrue([board isDrawn]);
     }
 }
@@ -51,7 +45,7 @@
     for( NSString* sequence in [_seqGen generateOneMoveFromWinningSequences])
     {
         DTIGameBoard* board = [[DTIGameBoard alloc] initWithComputerPlayerAs:[DTIPlayer x]];
-        [self playSequence:sequence on:board];
+        [GameBoardTests playSequence:sequence on:board];
         [board playBestMove];
         XCTAssertTrue([board isWon]);
     }
@@ -62,7 +56,7 @@
     for( NSString* sequence in [_seqGen generateOneMoveFromWinningSequences])
     {
         DTIGameBoard* board = [[DTIGameBoard alloc] initWithComputerPlayerAs:[DTIPlayer o]];
-        [self playSequence:sequence on:board];
+        [GameBoardTests playSequence:sequence on:board];
         [board playBestMove];
 
         NSMutableArray* seqSplit = [self repeatLastMoveAs:[DTIPlayer x]
@@ -89,7 +83,7 @@
     for( NSString* sequence in [_seqGen generateForkableSequences])
     {
         DTIGameBoard* board = [[DTIGameBoard alloc] initWithComputerPlayerAs:[DTIPlayer x]];
-        [self playSequence:sequence on:board];
+        [GameBoardTests playSequence:sequence on:board];
         [board playBestMove];
 
         NSMutableArray* seqSplit = [self repeatLastMoveAs:[DTIPlayer x]
@@ -117,7 +111,7 @@
     for( NSString* sequence in [_seqGen generateForkableSequences] )
     {
         DTIGameBoard* board = [[DTIGameBoard alloc] initWithComputerPlayerAs:[DTIPlayer o]];
-        [self playSequence:sequence on:board];
+        [GameBoardTests playSequence:sequence on:board];
         [board playBestMove];
 
         NSMutableArray* seqSplit = [self repeatLastMoveAs:[DTIPlayer o]
@@ -235,7 +229,7 @@
                        as:(DTIPlayer*)player
 {
     DTIGameBoard* board = [[DTIGameBoard alloc] initWithComputerPlayerAs:player];
-    [self playSequence:sequence on:board];
+    [GameBoardTests playSequence:sequence on:board];
     [board playBestMove];
     XCTAssertEqual(board.lastPlayedSquare.integerValue, square);
 }
@@ -285,7 +279,7 @@ andDecreaseIfItMatches:(DTIPlayer*)otherPlayer
     return 0;
 }
 
--(void)playSequence:(NSString*)sequence on:(DTIGameBoard*)board
++(void)playSequence:(NSString*)sequence on:(DTIGameBoard*)board
 {
     for( int i = 0; i < 9; ++i )
     {
@@ -302,12 +296,12 @@ andDecreaseIfItMatches:(DTIPlayer*)otherPlayer
     NSMutableArray* sequenceArray = [[NSMutableArray alloc] init];
     for( int i = 0; i < 9; ++i )
     {
-        [sequenceArray addObject:[self getPlayerForCharacter:[sequence characterAtIndex:i]]];
+        [sequenceArray addObject:[GameBoardTests getPlayerForCharacter:[sequence characterAtIndex:i]]];
     }
     return sequenceArray;
 }
 
--(DTIPlayer*)getPlayerForCharacter:(unichar)character
++(DTIPlayer*)getPlayerForCharacter:(unichar)character
 {
     switch(character)
     {

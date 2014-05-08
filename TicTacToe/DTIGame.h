@@ -13,13 +13,18 @@
 
 @interface DTIGame : NSObject {
     DTIGameBoard* _board;
+    NSMutableArray* _lastPlayedSquares;
 }
 
+-(id)initWithGameBoard:(DTIGameBoard*)board;
 -(void)resetWithComputerFirst;
 -(void)resetWithPlayerFirst;
 
--(void)play:(NSInteger)square;
--(void)playComputer;
+-(void)touchIn:(NSInteger)square;
+-(void)touchOutsideSquare;
+-(NSArray*)getPlaysInOrder;
+
+-(bool)isInPlay;
 
 @property (readonly) NSInteger won;
 @property (readonly) NSInteger lost;
@@ -28,7 +33,5 @@
 @property (readonly) bool isDrawn;
 @property (readonly) bool isLost;
 
-@property (readonly) DTIPlayer* lastPlayer;
-@property (readonly) NSNumber* lastPlayedSquare;
 
 @end

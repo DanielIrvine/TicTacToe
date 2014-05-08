@@ -14,9 +14,16 @@
 
 -(id)init
 {
+    return [self initWithGameBoard:nil];
+}
+
+-(id)initWithGameBoard:(DTIGameBoard*)board
+{
     if(self = [super init])
     {
         [self reset];
+        _lastPlayedSquares = [[NSMutableArray alloc] init];
+        _board = board;
     }
     return self;
 }
@@ -25,7 +32,7 @@
 {
     _isLost = false;
     _isDrawn = false;
-    _lastPlayer = [DTIPlayer o];
+    [_lastPlayedSquares removeAllObjects];
 }
 
 -(void)resetWithComputerFirst
@@ -43,20 +50,25 @@
 
 -(void)play:(NSInteger)square
 {
-    [_board play:[_board.player opponent] inSquare:square];
-    [self update];
+    if( [self isInPlay] )
+    {
+        [_board play:[_board.player opponent] inSquare:square];
+        [self update];
+    }
 }
 
 -(void)playComputer
 {
-    [_board playBestMove];
-    [self update];
+    if( [self isInPlay] )
+    {
+        [_board playBestMove];
+        [self update];
+    }
 }
 
 -(void)update
 {
-    _lastPlayer = [_lastPlayer opponent];
-    _lastPlayedSquare = _board.lastPlayedSquare;
+    [_lastPlayedSquares addObject:_board.lastPlayedSquare];
 
     if( [_board isWon] ) { // This is always a win for the computer
         _lost++;
@@ -67,6 +79,38 @@
         _drawn++;
         _isDrawn = true;
     }
+}
+
+-(void)touchIn:(NSInteger)square
+{
+    if( ![self isInPlay] )
+    {
+        [self reset];
+    }
+    else
+    {
+        [_lastPlayedSquares removeAllObjects];
+        [self play:square];
+        [self playComputer];
+    }
+}
+
+-(void)touchOutsideSquare
+{
+    if( ![self isInPlay] )
+    {
+        [self reset];
+    }
+}
+
+-(bool)isInPlay
+{
+    return !_isDrawn && !_isLost;
+}
+
+-(NSArray*)getPlaysInOrder
+{
+    return _lastPlayedSquares;
 }
 
 @end
