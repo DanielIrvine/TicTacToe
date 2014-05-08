@@ -23,6 +23,7 @@
 -(id)initWithComputerPlayerAs:(DTIPlayer*)player;
 -(bool)isWon;
 -(bool)isDrawn;
+-(bool)allSquaresEmpty;
 -(void)playBestMove;
 
 -(void)play:(DTIPlayer*)player inSquare:(NSInteger)square;

@@ -7,11 +7,15 @@
 //
 
 #import "DTIComputerPlayerRule.h"
+#import "DTICenterRule.h"
 #import "DTIBlockForkRule.h"
+#import "DTIEmptySquareRule.h"
+#import "DTIFirstMoveRule.h"
 #import "DTIRowOfTwoRule.h"
 #import "DTIForkRule.h"
 #import "DTIGameBoard.h"
 #import "DTIPlayer.h"
+#import "DTIOppositeCornerRule.h"
 
 @implementation DTIComputerPlayerRule
 
@@ -28,10 +32,15 @@
 // Each of these rules must be applied in this order to ensure a win or draw
 +(NSArray*)buildAllWithGameBoard:(DTIGameBoard*)board andSquares:(NSArray*)squares
 {
-    return @[[DTIRowOfTwoRule winRuleForBoard:board andSquares:squares],
+    return @[[[DTIFirstMoveRule alloc] initWithGameBoard:board andSquares:squares],
+             [DTIRowOfTwoRule winRuleForBoard:board andSquares:squares],
              [DTIRowOfTwoRule blockRuleForBoard:board andSquares:squares],
              [[DTIForkRule alloc] initWithGameBoard:board andSquares:squares],
-             [[DTIBlockForkRule alloc] initWithGameBoard:board andSquares:squares]];
+             [[DTIBlockForkRule alloc] initWithGameBoard:board andSquares:squares],
+             [[DTICenterRule alloc] initWithGameBoard:board andSquares:squares],
+             [[DTIOppositeCornerRule alloc] initWithGameBoard:board andSquares:squares],
+             [[DTIEmptySquareRule alloc] initWithGameBoard:board andSquares:squares],
+             ];
 }
 
 -(bool)tryPlay

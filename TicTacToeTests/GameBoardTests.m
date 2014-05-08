@@ -158,6 +158,89 @@
     }
 }
 
+-(void)testWhenTheCenterIsEmptyThenTheCenterIsPlayed
+{
+    static const NSInteger kCenterSquare = 4;
+
+    [self testSequencesAndExpectedPlays:@{@"X--------" : @(kCenterSquare),
+                                          @"-X-------" : @(kCenterSquare),
+                                          @"--X------" : @(kCenterSquare),
+                                          @"---X-----" : @(kCenterSquare),
+                                          @"-----X---" : @(kCenterSquare),
+                                          @"------X--" : @(kCenterSquare),
+                                          @"-------X-" : @(kCenterSquare),
+                                          @"--------X" : @(kCenterSquare),
+                                          }
+                                     as:[DTIPlayer x]];
+}
+
+-(void)testWhenACornerIsPlayedThenTheOppositeCornerIsPlayed
+{
+    [self testSequencesAndExpectedPlays:@{@"O---X----": @8,
+                                          @"--O-X----": @6,
+                                          @"----X-O--": @2,
+                                          @"----X---O": @0
+                                          }
+                                     as:[DTIPlayer x]];
+}
+
+-(void)testWhenACornerIsEmptyThenItIsPlayed
+{
+    [self testSequencesAndExpectedPlays:@{@"O---X---X": @2,
+                                          @"--X-X-O--": @8,
+                                          }
+                                     as:[DTIPlayer o]];
+}
+
+-(void)testWhenOnlySidesAreEmptyThenItIsPlayed
+{
+    [self testSequencesAndExpectedPlays:@{@"OOXXXOO-X": @7,
+                                          }
+                                     as:[DTIPlayer x]];
+}
+
+-(void)testWhenBoardIsEmptyThenAnySquareIsPlayed
+{
+    DTIGameBoard* board = [[DTIGameBoard alloc] initWithComputerPlayerAs:[DTIPlayer x]];
+    [board playBestMove];
+    XCTAssertNotNil(board.lastPlayedSquare);
+}
+
+-(void)testWhenPlayingAfterCornerOpeningMoveThenCenterIsPlayed
+{
+    [self testSequencesAndExpectedPlays:@{@"O---X---X": @2,
+                                          @"--X-X-O--": @8,
+                                          }
+                                     as:[DTIPlayer o]];
+}
+
+-(void)testWhenPlayingAfterCenterOpeningMoveThenCornerIsPlayed
+{
+    [self testSequencesAndExpectedPlays:@{@"----X----": @0,
+                                          }
+                                     as:[DTIPlayer o]];
+}
+
+-(void)testSequencesAndExpectedPlays:(NSDictionary*)plays as:(DTIPlayer*)player
+{
+    for( NSString* sequence in plays )
+    {
+        NSInteger square = [plays[sequence] integerValue];
+        [self expectPlayInSquare:square afterSequence:sequence as:player];
+    }
+}
+
+-(void)expectPlayInSquare:(NSInteger)square
+            afterSequence:(NSString*)sequence
+                       as:(DTIPlayer*)player
+{
+    DTIGameBoard* board = [[DTIGameBoard alloc] initWithComputerPlayerAs:player];
+    [self playSequence:sequence on:board];
+    [board playBestMove];
+    XCTAssertEqual(board.lastPlayedSquare.integerValue, square);
+}
+
+
 -(NSNumber*)getEmptySquareFrom:(NSArray*)triplet inSequence:(NSArray*)sequence
 {
     for( NSNumber* index in triplet )

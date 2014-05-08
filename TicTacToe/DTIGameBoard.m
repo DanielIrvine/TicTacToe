@@ -69,6 +69,15 @@
     return true;
 }
 
+-(bool)allSquaresEmpty
+{
+    for(int i = 0; i < 9; ++i)
+        if(_squares[i] != [DTIPlayer unplayed])
+            return false;
+
+    return true;
+}
+
 -(bool)threeSquaresAreEqual:(NSInteger)one
                            :(NSInteger)two
                            :(NSInteger)three

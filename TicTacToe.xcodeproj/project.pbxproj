@@ -12,6 +12,11 @@
 		655D9DDF1919A0C8003A73E9 /* DTIForkRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 655D9DDE1919A0C8003A73E9 /* DTIForkRule.m */; };
 		659E364C191A737800F464AE /* DTIPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 659E364B191A737800F464AE /* DTIPlayer.m */; };
 		659E364F191A8ACB00F464AE /* DTIBlockForkRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 659E364E191A8ACB00F464AE /* DTIBlockForkRule.m */; };
+		659E3652191ABE7D00F464AE /* DTICenterRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 659E3651191ABE7D00F464AE /* DTICenterRule.m */; };
+		659E3655191ABF0600F464AE /* DTIOppositeCornerRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 659E3654191ABF0600F464AE /* DTIOppositeCornerRule.m */; };
+		659E3658191AC3D400F464AE /* DTIEmptySquareRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 659E3657191AC3D400F464AE /* DTIEmptySquareRule.m */; };
+		659E365E191ACA1300F464AE /* DTIFirstMoveRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 659E365D191ACA1300F464AE /* DTIFirstMoveRule.m */; };
+		659E3661191AE8EE00F464AE /* DTIGame.m in Sources */ = {isa = PBXBuildFile; fileRef = 659E3660191AE8EE00F464AE /* DTIGame.m */; };
 		65F00EDF19195514000657CB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65F00EDE19195514000657CB /* Foundation.framework */; };
 		65F00EE119195514000657CB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65F00EE019195514000657CB /* CoreGraphics.framework */; };
 		65F00EE319195514000657CB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65F00EE219195514000657CB /* UIKit.framework */; };
@@ -22,8 +27,7 @@
 		65F00EF419195514000657CB /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65F00EF219195514000657CB /* Main_iPhone.storyboard */; };
 		65F00EF719195514000657CB /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65F00EF519195514000657CB /* Main_iPad.storyboard */; };
 		65F00EFA19195514000657CB /* DTIViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F00EF919195514000657CB /* DTIViewController.m */; };
-		65F00EFD19195515000657CB /* DTIMyScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F00EFC19195515000657CB /* DTIMyScene.m */; };
-		65F00EFF19195515000657CB /* Spaceship.png in Resources */ = {isa = PBXBuildFile; fileRef = 65F00EFE19195515000657CB /* Spaceship.png */; };
+		65F00EFD19195515000657CB /* DTIGameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F00EFC19195515000657CB /* DTIGameScene.m */; };
 		65F00F0119195515000657CB /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65F00F0019195515000657CB /* Images.xcassets */; };
 		65F00F0819195515000657CB /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65F00F0719195515000657CB /* XCTest.framework */; };
 		65F00F0919195515000657CB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65F00EDE19195514000657CB /* Foundation.framework */; };
@@ -55,6 +59,16 @@
 		659E364B191A737800F464AE /* DTIPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTIPlayer.m; sourceTree = "<group>"; };
 		659E364D191A8ACB00F464AE /* DTIBlockForkRule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTIBlockForkRule.h; sourceTree = "<group>"; };
 		659E364E191A8ACB00F464AE /* DTIBlockForkRule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTIBlockForkRule.m; sourceTree = "<group>"; };
+		659E3650191ABE7D00F464AE /* DTICenterRule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTICenterRule.h; sourceTree = "<group>"; };
+		659E3651191ABE7D00F464AE /* DTICenterRule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTICenterRule.m; sourceTree = "<group>"; };
+		659E3653191ABF0600F464AE /* DTIOppositeCornerRule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTIOppositeCornerRule.h; sourceTree = "<group>"; };
+		659E3654191ABF0600F464AE /* DTIOppositeCornerRule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTIOppositeCornerRule.m; sourceTree = "<group>"; };
+		659E3656191AC3D400F464AE /* DTIEmptySquareRule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTIEmptySquareRule.h; sourceTree = "<group>"; };
+		659E3657191AC3D400F464AE /* DTIEmptySquareRule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTIEmptySquareRule.m; sourceTree = "<group>"; };
+		659E365C191ACA1300F464AE /* DTIFirstMoveRule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTIFirstMoveRule.h; sourceTree = "<group>"; };
+		659E365D191ACA1300F464AE /* DTIFirstMoveRule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTIFirstMoveRule.m; sourceTree = "<group>"; };
+		659E365F191AE8EE00F464AE /* DTIGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTIGame.h; sourceTree = "<group>"; };
+		659E3660191AE8EE00F464AE /* DTIGame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTIGame.m; sourceTree = "<group>"; };
 		65F00EDB19195514000657CB /* TicTacToe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TicTacToe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		65F00EDE19195514000657CB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		65F00EE019195514000657CB /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -70,9 +84,8 @@
 		65F00EF619195514000657CB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
 		65F00EF819195514000657CB /* DTIViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DTIViewController.h; sourceTree = "<group>"; };
 		65F00EF919195514000657CB /* DTIViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DTIViewController.m; sourceTree = "<group>"; };
-		65F00EFB19195514000657CB /* DTIMyScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DTIMyScene.h; sourceTree = "<group>"; };
-		65F00EFC19195515000657CB /* DTIMyScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DTIMyScene.m; sourceTree = "<group>"; };
-		65F00EFE19195515000657CB /* Spaceship.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Spaceship.png; sourceTree = "<group>"; };
+		65F00EFB19195514000657CB /* DTIGameScene.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DTIGameScene.h; sourceTree = "<group>"; };
+		65F00EFC19195515000657CB /* DTIGameScene.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DTIGameScene.m; sourceTree = "<group>"; };
 		65F00F0019195515000657CB /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		65F00F0619195515000657CB /* TicTacToeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TicTacToeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		65F00F0719195515000657CB /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
@@ -113,14 +126,22 @@
 		655D9DD319199ADA003A73E9 /* ComputerPlayerRules */ = {
 			isa = PBXGroup;
 			children = (
-				655D9DD419199B02003A73E9 /* DTIComputerPlayerRule.h */,
-				655D9DD519199B02003A73E9 /* DTIComputerPlayerRule.m */,
-				655D9DD719199BC0003A73E9 /* DTIRowOfTwoRule.h */,
-				655D9DD819199BC0003A73E9 /* DTIRowOfTwoRule.m */,
-				655D9DDD1919A0C8003A73E9 /* DTIForkRule.h */,
-				655D9DDE1919A0C8003A73E9 /* DTIForkRule.m */,
 				659E364D191A8ACB00F464AE /* DTIBlockForkRule.h */,
 				659E364E191A8ACB00F464AE /* DTIBlockForkRule.m */,
+				659E3650191ABE7D00F464AE /* DTICenterRule.h */,
+				659E3651191ABE7D00F464AE /* DTICenterRule.m */,
+				655D9DD419199B02003A73E9 /* DTIComputerPlayerRule.h */,
+				655D9DD519199B02003A73E9 /* DTIComputerPlayerRule.m */,
+				659E3656191AC3D400F464AE /* DTIEmptySquareRule.h */,
+				659E3657191AC3D400F464AE /* DTIEmptySquareRule.m */,
+				659E365C191ACA1300F464AE /* DTIFirstMoveRule.h */,
+				659E365D191ACA1300F464AE /* DTIFirstMoveRule.m */,
+				655D9DDD1919A0C8003A73E9 /* DTIForkRule.h */,
+				655D9DDE1919A0C8003A73E9 /* DTIForkRule.m */,
+				659E3653191ABF0600F464AE /* DTIOppositeCornerRule.h */,
+				659E3654191ABF0600F464AE /* DTIOppositeCornerRule.m */,
+				655D9DD719199BC0003A73E9 /* DTIRowOfTwoRule.h */,
+				655D9DD819199BC0003A73E9 /* DTIRowOfTwoRule.m */,
 			);
 			name = ComputerPlayerRules;
 			sourceTree = "<group>";
@@ -166,15 +187,16 @@
 				65F00EF519195514000657CB /* Main_iPad.storyboard */,
 				65F00EF819195514000657CB /* DTIViewController.h */,
 				65F00EF919195514000657CB /* DTIViewController.m */,
-				65F00EFB19195514000657CB /* DTIMyScene.h */,
-				65F00EFC19195515000657CB /* DTIMyScene.m */,
-				65F00EFE19195515000657CB /* Spaceship.png */,
+				65F00EFB19195514000657CB /* DTIGameScene.h */,
+				65F00EFC19195515000657CB /* DTIGameScene.m */,
 				65F00F0019195515000657CB /* Images.xcassets */,
 				65F00EE719195514000657CB /* Supporting Files */,
 				65F00F1D191958EC000657CB /* DTIGameBoard.h */,
 				65F00F1E191958EC000657CB /* DTIGameBoard.m */,
 				659E364A191A737800F464AE /* DTIPlayer.h */,
 				659E364B191A737800F464AE /* DTIPlayer.m */,
+				659E365F191AE8EE00F464AE /* DTIGame.h */,
+				659E3660191AE8EE00F464AE /* DTIGame.m */,
 			);
 			path = TicTacToe;
 			sourceTree = "<group>";
@@ -287,7 +309,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				65F00EFF19195515000657CB /* Spaceship.png in Resources */,
 				65F00F0119195515000657CB /* Images.xcassets in Resources */,
 				65F00EF719195514000657CB /* Main_iPad.storyboard in Resources */,
 				65F00EF419195514000657CB /* Main_iPhone.storyboard in Resources */,
@@ -310,12 +331,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				65F00EFD19195515000657CB /* DTIMyScene.m in Sources */,
+				659E3661191AE8EE00F464AE /* DTIGame.m in Sources */,
+				659E3652191ABE7D00F464AE /* DTICenterRule.m in Sources */,
+				65F00EFD19195515000657CB /* DTIGameScene.m in Sources */,
 				65F00EF119195514000657CB /* DTIAppDelegate.m in Sources */,
 				65F00EED19195514000657CB /* main.m in Sources */,
 				655D9DD619199B02003A73E9 /* DTIComputerPlayerRule.m in Sources */,
 				659E364C191A737800F464AE /* DTIPlayer.m in Sources */,
+				659E3658191AC3D400F464AE /* DTIEmptySquareRule.m in Sources */,
+				659E365E191ACA1300F464AE /* DTIFirstMoveRule.m in Sources */,
 				65F00EFA19195514000657CB /* DTIViewController.m in Sources */,
+				659E3655191ABF0600F464AE /* DTIOppositeCornerRule.m in Sources */,
 				655D9DDF1919A0C8003A73E9 /* DTIForkRule.m in Sources */,
 				655D9DD919199BC0003A73E9 /* DTIRowOfTwoRule.m in Sources */,
 				65F00F1F191958EC000657CB /* DTIGameBoard.m in Sources */,
