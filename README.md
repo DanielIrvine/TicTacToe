@@ -4,11 +4,11 @@ TicTacToe
 SCREENSHOTS.
 
 Please see screenshots in the screenshots folder to see how this game is played:
- onLaunch.png            When the app is first opened
- lost.png                After losing a game
- afterThreeGames.png     After three games (lost and drawn)
- playingAgain.png        Dialog that appears when tapping the screen after a game is finished.
- 
+ * onLaunch.png            When the app is first opened
+ * lost.png                After losing a game
+ * afterThreeGames.png     After three games (lost and drawn)
+ * playingAgain.png        Dialog that appears when tapping the screen after a game is finished.
+ * testCases.png           All the passing test cases, as displayed in XCode.
  
 HOW TO PLAY.
 
