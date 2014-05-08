@@ -18,7 +18,7 @@ static const NSInteger kCenterSquare = 4;
 {
     if( _squares[kCenterSquare] == [DTIPlayer unplayed] )
     {
-        [_board play:_board.player inSquare:kCenterSquare];
+        [_board play:_board.computer inSquare:kCenterSquare];
         return true;
     }
     return false;

@@ -52,7 +52,7 @@
 {
     if( [self isInPlay] )
     {
-        [_board play:[_board.player opponent] inSquare:square];
+        [_board play:[_board.computer opponent] inSquare:square];
         [self update];
     }
 }

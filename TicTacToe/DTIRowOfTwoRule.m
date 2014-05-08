@@ -27,7 +27,7 @@
 +(DTIRowOfTwoRule*)winRuleForBoard:(DTIGameBoard*)board
                         andSquares:(NSArray*)squares
 {
-    return [[DTIRowOfTwoRule alloc] initWithPlayerToCheck:board.player
+    return [[DTIRowOfTwoRule alloc] initWithPlayerToCheck:board.computer
                                              andGameBoard:board
                                                andSquares:squares];
 }
@@ -35,7 +35,7 @@
 +(DTIRowOfTwoRule*)blockRuleForBoard:(DTIGameBoard*)board
                           andSquares:(NSArray*)squares
 {
-    return [[DTIRowOfTwoRule alloc] initWithPlayerToCheck:[board.player opponent]
+    return [[DTIRowOfTwoRule alloc] initWithPlayerToCheck:[board.computer opponent]
                                              andGameBoard:board
                                                andSquares:squares];
 }
@@ -56,7 +56,7 @@
 
             if( player == _playerToCheck )
             {
-                [_board play:_board.player
+                [_board play:_board.computer
                     inSquare:[move integerValue]];
                 return true;
             }

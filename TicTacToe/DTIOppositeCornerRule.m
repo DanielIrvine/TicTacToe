@@ -20,10 +20,10 @@ static const NSInteger kOppositeCorners[4] = {8, 6, 2, 0};
 
     for( int i = 0; i < 4; ++i )
     {
-        if( _squares[kCorners[i]] == [_board.player opponent]
+        if( _squares[kCorners[i]] == [_board.computer opponent]
            && _squares[kOppositeCorners[i]] == [DTIPlayer unplayed] )
         {
-            [_board play:_board.player inSquare:kOppositeCorners[i]];
+            [_board play:_board.computer inSquare:kOppositeCorners[i]];
             return true;
         }
     }

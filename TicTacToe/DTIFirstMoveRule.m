@@ -15,7 +15,7 @@
 {
     if( [_board allSquaresEmpty])
     {
-        [_board play:_board.player inSquare:arc4random_uniform(9)];
+        [_board play:_board.computer inSquare:arc4random_uniform(9)];
         return true;
     }
     return false;

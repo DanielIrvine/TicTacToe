@@ -26,7 +26,7 @@
         NSNumber* blockedSquare = [self determineIfOnlyOneSquareBlockedInTriplet:winningTriplet];
 
         if( blockedSquare != nil
-           && _squares[blockedSquare.integerValue] == [_board.player opponent])
+           && _squares[blockedSquare.integerValue] == [_board.computer opponent])
         {
             for( NSNumber* square in winningTriplet )
             {
@@ -53,7 +53,7 @@
             NSNumber* blockedSquare = [self determineIfOnlyOneSquareBlockedInTriplet:winningTriplet];
 
             if( blockedSquare != nil
-               && _squares[blockedSquare.integerValue] == _board.player )
+               && _squares[blockedSquare.integerValue] == _board.computer )
             {
                 NSMutableArray* freeSquares = [winningTriplet mutableCopy];
                 [freeSquares removeObjectIdenticalTo:blockedSquare];
@@ -79,7 +79,7 @@
 
         if( candidate != nil ) // This should always be true
         {
-            [_board play:_board.player inSquare:[candidate integerValue]];
+            [_board play:_board.computer inSquare:[candidate integerValue]];
             return true;
         }
     }
@@ -91,7 +91,7 @@
 {
     if( counts[square.integerValue] == 2 )
     {
-        [_board play:_board.player inSquare:square.integerValue];
+        [_board play:_board.computer inSquare:square.integerValue];
         return true;
     }
     return false;

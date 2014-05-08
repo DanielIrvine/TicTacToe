@@ -15,7 +15,7 @@
     NSArray* _computerPlayerRules;
 }
 
-@property (readonly) DTIPlayer* player;
+@property (readonly) DTIPlayer* computer;
 @property (readonly) NSArray* winningTriplets;
 
 @property (readonly) NSNumber* lastPlayedSquare;

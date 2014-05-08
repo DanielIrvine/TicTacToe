@@ -21,7 +21,7 @@
         for (NSInteger i = 0; i < 9; i++) {
             [_squares insertObject:[DTIPlayer unplayed] atIndex:i];
         }
-        _player = player;
+        _computer = player;
 
         _winningTriplets = @[@[@0,@1,@2],
                              @[@3,@4,@5],
@@ -46,7 +46,7 @@
                                       :[winningTriplet[1] integerValue]
                                       :[winningTriplet[2] integerValue]])
         {
-            if( _squares[[winningTriplet[0] integerValue]] == _player )
+            if( _squares[[winningTriplet[0] integerValue]] == _computer )
             {
                 return true;
             }

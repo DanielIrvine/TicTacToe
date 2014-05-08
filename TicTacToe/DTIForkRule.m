@@ -24,7 +24,7 @@
         [self determineIfOnlyOneSquareBlockedInTriplet:winningTriplet];
 
         if( blockedSquare != nil
-           && _squares[blockedSquare.integerValue] == _board.player)
+           && _squares[blockedSquare.integerValue] == _board.computer)
         {
             for( NSNumber* square in winningTriplet )
             {
@@ -36,7 +36,7 @@
 
                     if( counts[index] == 2 )
                     {
-                        [_board play:_board.player
+                        [_board play:_board.computer
                             inSquare:[square integerValue]];
                         return true;
                     }

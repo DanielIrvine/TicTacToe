@@ -28,7 +28,7 @@ static const NSInteger kSides[4] = {1, 3, 5, 7};
     {
         if( _squares[squares[i]] == [DTIPlayer unplayed] )
         {
-            [_board play:_board.player inSquare:squares[i]];
+            [_board play:_board.computer inSquare:squares[i]];
             return true;
         }
     }
