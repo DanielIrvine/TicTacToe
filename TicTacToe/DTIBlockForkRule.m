@@ -18,7 +18,6 @@
 
 -(bool)tryPlay
 {
-    // FIXME: really long method, need to refactor some of this out
     NSInteger counts[9] = {0};
     bool mustBlock = false;
     for( NSArray* winningTriplet in _board.winningTriplets )
@@ -47,45 +46,51 @@
 
     if( mustBlock )
     {
-        NSNumber* candidate;
-        for( NSArray* winningTriplet in _board.winningTriplets )
-        {
-            NSNumber* blockedSquare = [self determineIfOnlyOneSquareBlockedInTriplet:winningTriplet];
-
-            if( blockedSquare != nil
-               && _squares[blockedSquare.integerValue] == _board.computer )
-            {
-                NSMutableArray* freeSquares = [winningTriplet mutableCopy];
-                [freeSquares removeObjectIdenticalTo:blockedSquare];
-
-                if(counts[[freeSquares[0] integerValue]] == 2
-                   && counts[[freeSquares[1] integerValue]] == 2)
-                {
-                    // Can't play here as the player could still then fork
-                    break;
-                }
-
-                if( [self playSquareIfHasCountOfTwo:freeSquares[0] :counts]
-                   || [self playSquareIfHasCountOfTwo:freeSquares[1] :counts])
-                    return true;
-
-                // Either square is an acceptable position to move,
-                // but don't move yet--wait to see if any counts of 2 are
-                // discovered as they should have priority. Instead just save off
-                // the candidate.
-                candidate = freeSquares[0];
-            }
-        }
-
-        if( candidate != nil ) // This should always be true
-        {
-            [_board play:_board.computer inSquare:[candidate integerValue]];
-            return true;
-        }
+        [self makeBlockingMoveUsing:counts];
+        return true;
     }
 
     return false;
 }
+
+-(void)makeBlockingMoveUsing:(NSInteger[])counts
+{
+    NSNumber* candidate;
+    for( NSArray* winningTriplet in _board.winningTriplets )
+    {
+        NSNumber* blockedSquare = [self determineIfOnlyOneSquareBlockedInTriplet:winningTriplet];
+
+        if( blockedSquare != nil
+           && _squares[blockedSquare.integerValue] == _board.computer )
+        {
+            NSMutableArray* freeSquares = [winningTriplet mutableCopy];
+            [freeSquares removeObjectIdenticalTo:blockedSquare];
+
+            if(counts[[freeSquares[0] integerValue]] == 2
+               && counts[[freeSquares[1] integerValue]] == 2)
+            {
+                // Can't play here as the player could still then fork
+                break;
+            }
+
+            if( [self playSquareIfHasCountOfTwo:freeSquares[0] :counts]
+               || [self playSquareIfHasCountOfTwo:freeSquares[1] :counts])
+                return;
+
+            // Either square is an acceptable position to move,
+            // but don't move yet--wait to see if any counts of 2 are
+            // discovered as they should have priority. Instead just save off
+            // the candidate.
+            candidate = freeSquares[0];
+        }
+    }
+
+    if( candidate != nil ) // This should always be true
+    {
+        [_board play:_board.computer inSquare:[candidate integerValue]];
+    }
+}
+
 
 -(bool)playSquareIfHasCountOfTwo:(NSNumber*)square :(NSInteger[])counts
 {

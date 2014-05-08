@@ -169,17 +169,25 @@ static NSString* kSquareFont = @"Chalkduster";
         CGPoint location = [touch locationInNode:self];
         SKNode *node = [self nodeAtPoint:location];
 
-        NSInteger square = [_backgroundGameNodes indexOfObject:node];
-        if( square != NSNotFound )
+        if([self nodeHasNotYetBeenPlayed:node])
         {
-            [_game touchIn:square];
+            NSInteger square = [_backgroundGameNodes indexOfObject:node];
+            if( square != NSNotFound )
+            {
+                [_game touchIn:square];
+            }
+            else
+            {
+                [_game touchOutsideSquare];
+            }
+            [self updateAfterPlay];
         }
-        else
-        {
-            [_game touchOutsideSquare];
-        }
-        [self updateAfterPlay];
     }
+}
+
+-(bool)nodeHasNotYetBeenPlayed:(SKNode*)node
+{
+    return [node children].count == 0;
 }
 
 -(void)update:(CFTimeInterval)currentTime {
