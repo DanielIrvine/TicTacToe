@@ -9,7 +9,6 @@
 #import <XCTest/XCTest.h>
 #import "GameBoardTests.h"
 #import "DTIGameBoard.h"
-#import "DTISequenceGenerator.h"
 #import "DTIPlayer.h"
 
 @implementation GameBoardTests
@@ -17,267 +16,59 @@
 -(void)setUp
 {
     [super setUp];
-    _seqGen = [[DTISequenceGenerator alloc] init];
 }
 
--(void)testWhenWinningSequencePlayedThenIsWon
+
+-(void)testAllPossibleGameBoardsResultInWin
 {
-    for( NSString* sequence in [_seqGen generateAllWinningSequences])
+    DTIGameBoard* computerFirst = [[DTIGameBoard alloc] initWithComputerPlayerAs:[DTIPlayer x]];
+    DTIGameBoard* humanFirst = [[DTIGameBoard alloc] initWithComputerPlayerAs:[DTIPlayer o]];
+
+    DTIPlayer* firstPlayer = [DTIPlayer x];
+    XCTAssertTrue([self playNextMove:computerFirst forPlayer:firstPlayer]);
+    XCTAssertTrue([self playNextMove:humanFirst forPlayer:firstPlayer]);
+
+}
+
+-(bool)playNextMove:(DTIGameBoard*)board
+          forPlayer:(DTIPlayer*)player
+{
+    if( [board isDrawn] )
     {
-        DTIGameBoard* board = [[DTIGameBoard alloc] initWithComputerPlayerAs:[DTIPlayer x]];
-        [GameBoardTests playSequence:sequence on:board];
-        XCTAssertTrue([board isWon]);
+        return true;
     }
-}
-
--(void)testWhenDrawSequencePlayedThenIsDrawn
-{
-    for( NSString* sequence in [_seqGen generateDrawSequences])
+    else if( [board isWon] )
     {
-        DTIGameBoard* board = [[DTIGameBoard alloc] initWithComputerPlayerAs:[DTIPlayer x]];
-        [GameBoardTests playSequence:sequence on:board];
-        XCTAssertTrue([board isDrawn]);
-    }
-}
-
--(void)testWhenComputerPlayerCanWinThenWinningMoveIsTaken
-{
-    for( NSString* sequence in [_seqGen generateOneMoveFromWinningSequences])
-    {
-        DTIGameBoard* board = [[DTIGameBoard alloc] initWithComputerPlayerAs:[DTIPlayer x]];
-        [GameBoardTests playSequence:sequence on:board];
-        [board playBestMove];
-        XCTAssertTrue([board isWon]);
-    }
-}
-
--(void)testWhenComputerPlayerCanBlockThenBlockIsTaken
-{
-    for( NSString* sequence in [_seqGen generateOneMoveFromWinningSequences])
-    {
-        DTIGameBoard* board = [[DTIGameBoard alloc] initWithComputerPlayerAs:[DTIPlayer o]];
-        [GameBoardTests playSequence:sequence on:board];
-        [board playBestMove];
-
-        NSMutableArray* seqSplit = [self repeatLastMoveAs:[DTIPlayer x]
-                                               inSequence:sequence
-                                                       on:board];
-
-        bool wasBlocked = false;
-        for( NSArray* winningTriplet in board.winningTriplets )
+        if( board.computer == player) // means that the player won!
         {
-            if( seqSplit[[winningTriplet[0] integerValue]] == [DTIPlayer x]
-               && seqSplit[[winningTriplet[1] integerValue]] == [DTIPlayer x]
-               && seqSplit[[winningTriplet[2] integerValue]] == [DTIPlayer x] )
-            {
-                wasBlocked = true;
-                break;
-            }
+            return false;
         }
-        XCTAssertTrue(wasBlocked);
+        return true;
     }
-}
 
--(void)testWhenComputerPlayerCanForkThenForkIsTaken
-{
-    for( NSString* sequence in [_seqGen generateForkableSequences])
+    DTIPlayer* nextPlayer = [player opponent];
+    if( board.computer == player )
     {
-        DTIGameBoard* board = [[DTIGameBoard alloc] initWithComputerPlayerAs:[DTIPlayer x]];
-        [GameBoardTests playSequence:sequence on:board];
-        [board playBestMove];
+        DTIGameBoard* nextBoard = [board playBestMove];
 
-        NSMutableArray* seqSplit = [self repeatLastMoveAs:[DTIPlayer x]
-                                               inSequence:sequence
-                                                       on:board];
-
-        int rowsWithTwoXs = 0;
-        for( NSArray* winningTriplet in board.winningTriplets )
+        return [self playNextMove:nextBoard forPlayer:nextPlayer];
+    }
+    else
+    {
+        bool allTrue = true;
+        for( NSNumber* availableMove in [board availableSpaces] )
         {
-            if( [self thereAreTwoSquaresForPlayer:[DTIPlayer x]
-                                            inRow:winningTriplet
-                                           within:seqSplit] )
-            {
-                rowsWithTwoXs++;
-            }
+            DTIGameBoard* nextBoard = [[DTIGameBoard alloc] initWithExistingBoard:board
+                                                                       andNewMove:availableMove
+                                                                         asPlayer:player];
 
+            allTrue &= [self playNextMove:nextBoard forPlayer:nextPlayer];
         }
 
-        XCTAssertTrue(rowsWithTwoXs == 2);
+        return allTrue;
     }
 }
 
--(void)testWhenComputerPlayerMustBlockForkThenForkIsBlocked
-{
-    for( NSString* sequence in [_seqGen generateForkableSequences] )
-    {
-        DTIGameBoard* board = [[DTIGameBoard alloc] initWithComputerPlayerAs:[DTIPlayer o]];
-        [GameBoardTests playSequence:sequence on:board];
-        [board playBestMove];
-
-        NSMutableArray* seqSplit = [self repeatLastMoveAs:[DTIPlayer o]
-                                               inSequence:sequence
-                                                       on:board];
-
-        // The move has been successful if X must now move in exactly one
-        // square and making that move will not result in a fork for X
-        for( NSArray* winningTriplet in board.winningTriplets )
-        {
-            if( [self thereAreTwoSquaresForPlayer:[DTIPlayer o]
-                                            inRow:winningTriplet
-                                           within:seqSplit] )
-            {
-                // Move x into this square
-                NSInteger nextMoveForX = [[self getEmptySquareFrom:winningTriplet
-                                                       inSequence:seqSplit] integerValue];
-                seqSplit[nextMoveForX] = [DTIPlayer x];
-
-                // Check that a fork was not created
-                NSInteger validPlaysForX = 0;
-                for( NSArray* winningTripletForX in board.winningTriplets )
-                {
-                    if( [self thereAreTwoSquaresForPlayer:[DTIPlayer x]
-                                                    inRow:winningTripletForX
-                                                   within:seqSplit])
-                    {
-                        validPlaysForX++;
-                    }
-                }
-
-                XCTAssertTrue(validPlaysForX < 2);
-                return;
-            }
-        }
-
-        XCTFail(@"Player O should have had two-in-a-row but this was not found.");
-    }
-}
-
--(void)testWhenTheCenterIsEmptyThenTheCenterIsPlayed
-{
-    static const NSInteger kCenterSquare = 4;
-
-    [self testSequencesAndExpectedPlays:@{@"X--------" : @(kCenterSquare),
-                                          @"-X-------" : @(kCenterSquare),
-                                          @"--X------" : @(kCenterSquare),
-                                          @"---X-----" : @(kCenterSquare),
-                                          @"-----X---" : @(kCenterSquare),
-                                          @"------X--" : @(kCenterSquare),
-                                          @"-------X-" : @(kCenterSquare),
-                                          @"--------X" : @(kCenterSquare),
-                                          }
-                                     as:[DTIPlayer x]];
-}
-
--(void)testWhenACornerIsPlayedThenTheOppositeCornerIsPlayed
-{
-    [self testSequencesAndExpectedPlays:@{@"O---X----": @8,
-                                          @"--O-X----": @6,
-                                          @"----X-O--": @2,
-                                          @"----X---O": @0
-                                          }
-                                     as:[DTIPlayer x]];
-}
-
--(void)testWhenACornerIsEmptyThenItIsPlayed
-{
-    [self testSequencesAndExpectedPlays:@{@"O---X---X": @2,
-                                          @"--X-X-O--": @8,
-                                          }
-                                     as:[DTIPlayer o]];
-}
-
--(void)testWhenOnlySidesAreEmptyThenItIsPlayed
-{
-    [self testSequencesAndExpectedPlays:@{@"OOXXXOO-X": @7,
-                                          }
-                                     as:[DTIPlayer x]];
-}
-
--(void)testWhenBoardIsEmptyThenAnySquareIsPlayed
-{
-    DTIGameBoard* board = [[DTIGameBoard alloc] initWithComputerPlayerAs:[DTIPlayer x]];
-    [board playBestMove];
-    XCTAssertNotNil(board.lastPlayedSquare);
-}
-
--(void)testWhenPlayingAfterCornerOpeningMoveThenCenterIsPlayed
-{
-    [self testSequencesAndExpectedPlays:@{@"O---X---X": @2,
-                                          @"--X-X-O--": @8,
-                                          }
-                                     as:[DTIPlayer o]];
-}
-
--(void)testWhenPlayingAfterCenterOpeningMoveThenCornerIsPlayed
-{
-    [self testSequencesAndExpectedPlays:@{@"----X----": @0,
-                                          }
-                                     as:[DTIPlayer o]];
-}
-
--(void)testSequencesAndExpectedPlays:(NSDictionary*)plays as:(DTIPlayer*)player
-{
-    for( NSString* sequence in plays )
-    {
-        NSInteger square = [plays[sequence] integerValue];
-        [self expectPlayInSquare:square afterSequence:sequence as:player];
-    }
-}
-
--(void)expectPlayInSquare:(NSInteger)square
-            afterSequence:(NSString*)sequence
-                       as:(DTIPlayer*)player
-{
-    DTIGameBoard* board = [[DTIGameBoard alloc] initWithComputerPlayerAs:player];
-    [GameBoardTests playSequence:sequence on:board];
-    [board playBestMove];
-    XCTAssertEqual(board.lastPlayedSquare.integerValue, square);
-}
-
-
--(NSNumber*)getEmptySquareFrom:(NSArray*)triplet inSequence:(NSArray*)sequence
-{
-    for( NSNumber* index in triplet )
-    {
-        if(sequence[index.integerValue] == [DTIPlayer unplayed])
-            return index;
-    }
-    return nil;
-}
--(NSMutableArray*)repeatLastMoveAs:(DTIPlayer*)player
-                        inSequence:(NSString*)sequence
-                                on:(DTIGameBoard*)board
-{
-    NSMutableArray* seqSplit = [self splitSequenceIntoArray:sequence];
-    seqSplit[board.lastPlayedSquare.integerValue] = player;
-    return seqSplit;
-}
-
--(bool)thereAreTwoSquaresForPlayer:(DTIPlayer*)player
-                             inRow:(NSArray*)triplet
-                            within:(NSArray*)seqSplit
-{
-    int squareCount = 0;
-    squareCount += [self increaseIf:seqSplit[[triplet[0] integerValue]]
-                       matches:player
-        andDecreaseIfItMatches:[player opponent]];
-    squareCount += [self increaseIf:seqSplit[[triplet[1] integerValue]]
-                            matches:player
-             andDecreaseIfItMatches:[player opponent]];
-    squareCount += [self increaseIf:seqSplit[[triplet[2] integerValue]]
-                            matches:player
-             andDecreaseIfItMatches:[player opponent]];
-    return squareCount == 2;
-}
-
--(int)increaseIf:(DTIPlayer*)squareValue
-       matches:(DTIPlayer*)player
-andDecreaseIfItMatches:(DTIPlayer*)otherPlayer
-{
-    if(squareValue == player) return 1;
-    if(squareValue == otherPlayer) return -1;
-    return 0;
-}
 
 +(void)playSequence:(NSString*)sequence on:(DTIGameBoard*)board
 {

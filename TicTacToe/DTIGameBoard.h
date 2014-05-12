@@ -11,20 +11,26 @@
 @class DTIPlayer;
 
 @interface DTIGameBoard : NSObject {
-    NSMutableArray* _squares;
     NSArray* _computerPlayerRules;
 }
 
+@property (readonly) NSMutableArray* squares;
 @property (readonly) DTIPlayer* computer;
-@property (readonly) NSArray* winningTriplets;
 
 @property (readonly) NSNumber* lastPlayedSquare;
 
 -(id)initWithComputerPlayerAs:(DTIPlayer*)player;
+
+-(id)initWithExistingBoard:(DTIGameBoard*)board
+                andNewMove:(NSNumber*)move
+                  asPlayer:(DTIPlayer*)player;
+
 -(bool)isWon;
 -(bool)isDrawn;
 -(bool)allSquaresEmpty;
--(void)playBestMove;
+-(DTIGameBoard*)playBestMove;
 
 -(void)play:(DTIPlayer*)player inSquare:(NSInteger)square;
+-(NSArray*)availableSpaces;
+-(NSArray*) winningTriplets;
 @end

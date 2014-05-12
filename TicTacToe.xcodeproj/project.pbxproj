@@ -36,7 +36,6 @@
 		65F00F1219195515000657CB /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 65F00F1019195515000657CB /* InfoPlist.strings */; };
 		65F00F1419195515000657CB /* GameBoardTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F00F1319195515000657CB /* GameBoardTests.m */; };
 		65F00F1F191958EC000657CB /* DTIGameBoard.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F00F1E191958EC000657CB /* DTIGameBoard.m */; };
-		65F00F22191965A0000657CB /* DTISequenceGenerator.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F00F21191965A0000657CB /* DTISequenceGenerator.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -97,8 +96,6 @@
 		65F00F1319195515000657CB /* GameBoardTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GameBoardTests.m; sourceTree = "<group>"; };
 		65F00F1D191958EC000657CB /* DTIGameBoard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTIGameBoard.h; sourceTree = "<group>"; };
 		65F00F1E191958EC000657CB /* DTIGameBoard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTIGameBoard.m; sourceTree = "<group>"; };
-		65F00F20191965A0000657CB /* DTISequenceGenerator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTISequenceGenerator.h; sourceTree = "<group>"; };
-		65F00F21191965A0000657CB /* DTISequenceGenerator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTISequenceGenerator.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -221,8 +218,6 @@
 				659DF299191B6DD60065E54C /* GameTests.m */,
 				65F00F1319195515000657CB /* GameBoardTests.m */,
 				65F00F0E19195515000657CB /* Supporting Files */,
-				65F00F20191965A0000657CB /* DTISequenceGenerator.h */,
-				65F00F21191965A0000657CB /* DTISequenceGenerator.m */,
 				659DF29B191B7E490065E54C /* GameBoardTests.h */,
 			);
 			path = TicTacToeTests;
@@ -358,7 +353,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				65F00F22191965A0000657CB /* DTISequenceGenerator.m in Sources */,
 				659DF29A191B6DD60065E54C /* GameTests.m in Sources */,
 				65F00F1419195515000657CB /* GameBoardTests.m in Sources */,
 			);
