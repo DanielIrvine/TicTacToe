@@ -49,9 +49,11 @@
     DTIPlayer* nextPlayer = [player opponent];
     if( board.computer == player )
     {
-        DTIGameBoard* nextBoard = [board playBestMove];
+        // TODO
+        return false;
+        //DTIGameBoard* nextBoard = [board playBestMove];
 
-        return [self playNextMove:nextBoard forPlayer:nextPlayer];
+        //return [self playNextMove:nextBoard forPlayer:nextPlayer];
     }
     else
     {
@@ -66,42 +68,6 @@
         }
 
         return allTrue;
-    }
-}
-
-
-+(void)playSequence:(NSString*)sequence on:(DTIGameBoard*)board
-{
-    for( int i = 0; i < 9; ++i )
-    {
-        unichar c = [sequence characterAtIndex:i];
-        if( c != '-' )
-        {
-            [board play:[self getPlayerForCharacter:c] inSquare:i];
-        }
-    }
-}
-
--(NSMutableArray*)splitSequenceIntoArray:(NSString*)sequence
-{
-    NSMutableArray* sequenceArray = [[NSMutableArray alloc] init];
-    for( int i = 0; i < 9; ++i )
-    {
-        [sequenceArray addObject:[GameBoardTests getPlayerForCharacter:[sequence characterAtIndex:i]]];
-    }
-    return sequenceArray;
-}
-
-+(DTIPlayer*)getPlayerForCharacter:(unichar)character
-{
-    switch(character)
-    {
-        case 'X':
-            return [DTIPlayer x];
-        case 'O':
-            return [DTIPlayer o];
-        default:
-            return [DTIPlayer unplayed];
     }
 }
 

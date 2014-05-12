@@ -7,8 +7,6 @@
 //
 
 #import "DTIGameBoard.h"
-#import "DTIComputerPlayerRule.h"
-#import "DTIRowOfTwoRule.h"
 #import "DTIPlayer.h"
 
 static NSArray* kWinningTriplets;
@@ -38,12 +36,9 @@ static NSArray* kWinningTriplets;
     {
         _squares = [[NSMutableArray alloc] initWithCapacity:9];
         for (NSInteger i = 0; i < 9; i++) {
-            [_squares insertObject:[DTIPlayer unplayed] atIndex:i];
+            [_squares insertObject:[NSNull null] atIndex:i];
         }
         _computer = player;
-
-        _computerPlayerRules = [DTIComputerPlayerRule buildAllWithGameBoard:self
-                                                                 andSquares:_squares];
     }
     return self;
 }
@@ -58,9 +53,6 @@ static NSArray* kWinningTriplets;
         _squares[move.integerValue] = player;
 
         _computer = board.computer;
-
-        _computerPlayerRules = [DTIComputerPlayerRule buildAllWithGameBoard:self
-                                                                 andSquares:_squares];
     }
 
     return self;
@@ -74,10 +66,6 @@ static NSArray* kWinningTriplets;
                                       :[winningTriplet[1] integerValue]
                                       :[winningTriplet[2] integerValue]])
         {
-//            if( _squares[[winningTriplet[0] integerValue]] == _computer )
-//            {
-//                return true;
-//            }
             return true;
         }
     }
@@ -92,16 +80,7 @@ static NSArray* kWinningTriplets;
 -(bool)noSquaresEmpty
 {
     for(int i = 0; i < 9; ++i)
-        if(_squares[i] == [DTIPlayer unplayed])
-            return false;
-
-    return true;
-}
-
--(bool)allSquaresEmpty
-{
-    for(int i = 0; i < 9; ++i)
-        if(_squares[i] != [DTIPlayer unplayed])
+        if(_squares[i] == [NSNull null])
             return false;
 
     return true;
@@ -111,7 +90,7 @@ static NSArray* kWinningTriplets;
                            :(NSInteger)two
                            :(NSInteger)three
 {
-    return _squares[one] != [DTIPlayer unplayed]
+    return _squares[one] != [NSNull null]
     && _squares[one] == _squares[two]
     && _squares[one] == _squares[three];
 }
@@ -121,29 +100,12 @@ static NSArray* kWinningTriplets;
     _lastPlayedSquare = @(square);
 }
 
--(DTIGameBoard*)playBestMove
-{
-    // FIXME: remove the rule-based approach
-    for( DTIComputerPlayerRule* rule in _computerPlayerRules)
-    {
-        if( [rule tryPlay] )
-            break;
-    }
-
-    NSNumber* moveWas = _lastPlayedSquare;
-    _squares[moveWas.integerValue] = [DTIPlayer unplayed];
-
-    return [[DTIGameBoard alloc] initWithExistingBoard:self
-                                            andNewMove:moveWas
-                                             asPlayer:_computer];
-}
-
 -(NSArray*)availableSpaces
 {
     NSMutableArray* availableSpaces = [[NSMutableArray alloc] init];
     for(int i = 0; i < 9; ++i)
     {
-        if(_squares[i] == [DTIPlayer unplayed])
+        if(_squares[i] == [NSNull null])
             [availableSpaces addObject:[NSNumber numberWithInteger:i]];
     }
 

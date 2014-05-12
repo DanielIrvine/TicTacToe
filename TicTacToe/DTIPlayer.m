@@ -10,7 +10,6 @@
 
 static DTIPlayer* kX;
 static DTIPlayer* kO;
-static DTIPlayer* kUnplayed;
 
 @implementation DTIPlayer
 
@@ -19,7 +18,6 @@ static DTIPlayer* kUnplayed;
 
     kX = [[DTIPlayer alloc] initWithPlayer:@"X"];
     kO = [[DTIPlayer alloc] initWithPlayer:@"O"];
-    kUnplayed = [[DTIPlayer alloc] initWithPlayer:@"-"];
 }
 
 -(id)initWithPlayer:(NSString*)player
@@ -47,11 +45,6 @@ static DTIPlayer* kUnplayed;
 +(DTIPlayer*)o
 {
     return kO;
-}
-
-+(DTIPlayer*)unplayed
-{
-    return kUnplayed;
 }
 
 -(NSString *)description

@@ -27,8 +27,6 @@
 
 -(bool)isWon;
 -(bool)isDrawn;
--(bool)allSquaresEmpty;
--(DTIGameBoard*)playBestMove;
 
 -(void)play:(DTIPlayer*)player inSquare:(NSInteger)square;
 -(NSArray*)availableSpaces;

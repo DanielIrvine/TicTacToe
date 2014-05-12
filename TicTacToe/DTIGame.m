@@ -61,7 +61,7 @@
 {
     if( [self isInPlay] )
     {
-        [_board playBestMove];
+        // FIXME: [_board playBestMove];
         [self update];
     }
 }

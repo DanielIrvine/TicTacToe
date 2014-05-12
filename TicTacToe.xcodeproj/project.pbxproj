@@ -7,16 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		655D9DD619199B02003A73E9 /* DTIComputerPlayerRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 655D9DD519199B02003A73E9 /* DTIComputerPlayerRule.m */; };
-		655D9DD919199BC0003A73E9 /* DTIRowOfTwoRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 655D9DD819199BC0003A73E9 /* DTIRowOfTwoRule.m */; };
-		655D9DDF1919A0C8003A73E9 /* DTIForkRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 655D9DDE1919A0C8003A73E9 /* DTIForkRule.m */; };
 		659DF29A191B6DD60065E54C /* GameTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 659DF299191B6DD60065E54C /* GameTests.m */; };
 		659E364C191A737800F464AE /* DTIPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 659E364B191A737800F464AE /* DTIPlayer.m */; };
-		659E364F191A8ACB00F464AE /* DTIBlockForkRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 659E364E191A8ACB00F464AE /* DTIBlockForkRule.m */; };
-		659E3652191ABE7D00F464AE /* DTICenterRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 659E3651191ABE7D00F464AE /* DTICenterRule.m */; };
-		659E3655191ABF0600F464AE /* DTIOppositeCornerRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 659E3654191ABF0600F464AE /* DTIOppositeCornerRule.m */; };
-		659E3658191AC3D400F464AE /* DTIEmptySquareRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 659E3657191AC3D400F464AE /* DTIEmptySquareRule.m */; };
-		659E365E191ACA1300F464AE /* DTIFirstMoveRule.m in Sources */ = {isa = PBXBuildFile; fileRef = 659E365D191ACA1300F464AE /* DTIFirstMoveRule.m */; };
 		659E3661191AE8EE00F464AE /* DTIGame.m in Sources */ = {isa = PBXBuildFile; fileRef = 659E3660191AE8EE00F464AE /* DTIGame.m */; };
 		65F00EDF19195514000657CB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65F00EDE19195514000657CB /* Foundation.framework */; };
 		65F00EE119195514000657CB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65F00EE019195514000657CB /* CoreGraphics.framework */; };
@@ -49,26 +41,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		655D9DD419199B02003A73E9 /* DTIComputerPlayerRule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTIComputerPlayerRule.h; sourceTree = "<group>"; };
-		655D9DD519199B02003A73E9 /* DTIComputerPlayerRule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTIComputerPlayerRule.m; sourceTree = "<group>"; };
-		655D9DD719199BC0003A73E9 /* DTIRowOfTwoRule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTIRowOfTwoRule.h; sourceTree = "<group>"; };
-		655D9DD819199BC0003A73E9 /* DTIRowOfTwoRule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTIRowOfTwoRule.m; sourceTree = "<group>"; };
-		655D9DDD1919A0C8003A73E9 /* DTIForkRule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTIForkRule.h; sourceTree = "<group>"; };
-		655D9DDE1919A0C8003A73E9 /* DTIForkRule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTIForkRule.m; sourceTree = "<group>"; };
 		659DF299191B6DD60065E54C /* GameTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameTests.m; sourceTree = "<group>"; };
 		659DF29B191B7E490065E54C /* GameBoardTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameBoardTests.h; sourceTree = "<group>"; };
 		659E364A191A737800F464AE /* DTIPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTIPlayer.h; sourceTree = "<group>"; };
 		659E364B191A737800F464AE /* DTIPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTIPlayer.m; sourceTree = "<group>"; };
-		659E364D191A8ACB00F464AE /* DTIBlockForkRule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTIBlockForkRule.h; sourceTree = "<group>"; };
-		659E364E191A8ACB00F464AE /* DTIBlockForkRule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTIBlockForkRule.m; sourceTree = "<group>"; };
-		659E3650191ABE7D00F464AE /* DTICenterRule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTICenterRule.h; sourceTree = "<group>"; };
-		659E3651191ABE7D00F464AE /* DTICenterRule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTICenterRule.m; sourceTree = "<group>"; };
-		659E3653191ABF0600F464AE /* DTIOppositeCornerRule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTIOppositeCornerRule.h; sourceTree = "<group>"; };
-		659E3654191ABF0600F464AE /* DTIOppositeCornerRule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTIOppositeCornerRule.m; sourceTree = "<group>"; };
-		659E3656191AC3D400F464AE /* DTIEmptySquareRule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTIEmptySquareRule.h; sourceTree = "<group>"; };
-		659E3657191AC3D400F464AE /* DTIEmptySquareRule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTIEmptySquareRule.m; sourceTree = "<group>"; };
-		659E365C191ACA1300F464AE /* DTIFirstMoveRule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTIFirstMoveRule.h; sourceTree = "<group>"; };
-		659E365D191ACA1300F464AE /* DTIFirstMoveRule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTIFirstMoveRule.m; sourceTree = "<group>"; };
 		659E365F191AE8EE00F464AE /* DTIGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTIGame.h; sourceTree = "<group>"; };
 		659E3660191AE8EE00F464AE /* DTIGame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTIGame.m; sourceTree = "<group>"; };
 		65F00EDB19195514000657CB /* TicTacToe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TicTacToe.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -123,29 +99,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		655D9DD319199ADA003A73E9 /* ComputerPlayerRules */ = {
-			isa = PBXGroup;
-			children = (
-				659E364D191A8ACB00F464AE /* DTIBlockForkRule.h */,
-				659E364E191A8ACB00F464AE /* DTIBlockForkRule.m */,
-				659E3650191ABE7D00F464AE /* DTICenterRule.h */,
-				659E3651191ABE7D00F464AE /* DTICenterRule.m */,
-				655D9DD419199B02003A73E9 /* DTIComputerPlayerRule.h */,
-				655D9DD519199B02003A73E9 /* DTIComputerPlayerRule.m */,
-				659E3656191AC3D400F464AE /* DTIEmptySquareRule.h */,
-				659E3657191AC3D400F464AE /* DTIEmptySquareRule.m */,
-				659E365C191ACA1300F464AE /* DTIFirstMoveRule.h */,
-				659E365D191ACA1300F464AE /* DTIFirstMoveRule.m */,
-				655D9DDD1919A0C8003A73E9 /* DTIForkRule.h */,
-				655D9DDE1919A0C8003A73E9 /* DTIForkRule.m */,
-				659E3653191ABF0600F464AE /* DTIOppositeCornerRule.h */,
-				659E3654191ABF0600F464AE /* DTIOppositeCornerRule.m */,
-				655D9DD719199BC0003A73E9 /* DTIRowOfTwoRule.h */,
-				655D9DD819199BC0003A73E9 /* DTIRowOfTwoRule.m */,
-			);
-			name = ComputerPlayerRules;
-			sourceTree = "<group>";
-		};
 		65F00ED219195514000657CB = {
 			isa = PBXGroup;
 			children = (
@@ -180,7 +133,6 @@
 		65F00EE619195514000657CB /* TicTacToe */ = {
 			isa = PBXGroup;
 			children = (
-				655D9DD319199ADA003A73E9 /* ComputerPlayerRules */,
 				65F00EEF19195514000657CB /* DTIAppDelegate.h */,
 				65F00EF019195514000657CB /* DTIAppDelegate.m */,
 				65F00EF219195514000657CB /* Main_iPhone.storyboard */,
@@ -332,20 +284,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				659E3661191AE8EE00F464AE /* DTIGame.m in Sources */,
-				659E3652191ABE7D00F464AE /* DTICenterRule.m in Sources */,
 				65F00EFD19195515000657CB /* DTIGameScene.m in Sources */,
 				65F00EF119195514000657CB /* DTIAppDelegate.m in Sources */,
 				65F00EED19195514000657CB /* main.m in Sources */,
-				655D9DD619199B02003A73E9 /* DTIComputerPlayerRule.m in Sources */,
 				659E364C191A737800F464AE /* DTIPlayer.m in Sources */,
-				659E3658191AC3D400F464AE /* DTIEmptySquareRule.m in Sources */,
-				659E365E191ACA1300F464AE /* DTIFirstMoveRule.m in Sources */,
 				65F00EFA19195514000657CB /* DTIViewController.m in Sources */,
-				659E3655191ABF0600F464AE /* DTIOppositeCornerRule.m in Sources */,
-				655D9DDF1919A0C8003A73E9 /* DTIForkRule.m in Sources */,
-				655D9DD919199BC0003A73E9 /* DTIRowOfTwoRule.m in Sources */,
 				65F00F1F191958EC000657CB /* DTIGameBoard.m in Sources */,
-				659E364F191A8ACB00F464AE /* DTIBlockForkRule.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

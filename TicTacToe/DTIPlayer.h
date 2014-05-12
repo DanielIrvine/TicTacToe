@@ -17,7 +17,6 @@
 
 +(DTIPlayer*)x;
 +(DTIPlayer*)o;
-+(DTIPlayer*)unplayed;
 
 
 @end
