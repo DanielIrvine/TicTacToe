@@ -55,6 +55,13 @@ static NSArray* kWinningTriplets;
     return self;
 }
 
+-(DTIGameBoard*)playSquare:(NSNumber*)move asPlayer:(DTIPlayer*)player
+{
+    return [[DTIGameBoard alloc] initWithExistingBoard:self
+                                            andNewMove:move asPlayer:player];
+}
+
+
 -(bool)isWon
 {
     return [self getWinningTriplet] != nil;
@@ -132,9 +139,7 @@ static NSArray* kWinningTriplets;
     DTIGameBoard* rotated = [[DTIGameBoard alloc] init];
     for( int i = 0; i < 9; ++i )
     {
-        rotated = [[DTIGameBoard alloc] initWithExistingBoard:rotated
-                                                   andNewMove:rotation[i]
-                                                     asPlayer:_squares[i]];
+        rotated = [rotated playSquare:rotation[i] asPlayer:_squares[i]];
     }
     return rotated;
 }

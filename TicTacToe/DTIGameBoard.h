@@ -15,9 +15,7 @@
 @property (readonly) NSMutableArray* squares;
 
 -(id)init;
--(id)initWithExistingBoard:(DTIGameBoard*)board
-                andNewMove:(NSNumber*)move
-                  asPlayer:(DTIPlayer*)player;
+-(DTIGameBoard*)playSquare:(NSNumber*)move asPlayer:(DTIPlayer*)player;
 
 -(bool)isWon;
 -(bool)isDrawn;

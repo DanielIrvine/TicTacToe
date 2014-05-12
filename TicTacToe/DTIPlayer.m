@@ -50,9 +50,7 @@
 
     for( NSNumber* move in [gameBoard availableSpaces] )
     {
-        DTIGameBoard* nextBoard = [[DTIGameBoard alloc] initWithExistingBoard:gameBoard
-                                                                   andNewMove:move
-                                                                     asPlayer:self];
+        DTIGameBoard* nextBoard = [gameBoard playSquare:move asPlayer:self];
 
         if( [nextBoard isDrawn] )
         {

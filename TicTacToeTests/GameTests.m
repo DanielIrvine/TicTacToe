@@ -103,9 +103,7 @@
         {
             DTIPlayer* player = [GameTests getPlayerForCharacter:c
                                                          withXAs:game.x];
-            game.board = [[DTIGameBoard alloc] initWithExistingBoard:game.board
-                                                        andNewMove:@(i)
-                                                          asPlayer:player];
+            game.board = [game.board playSquare:@(i) asPlayer:player];
         }
     }
 

@@ -73,9 +73,7 @@
 
 -(void)makePlayInSquare:(NSNumber*)square forPlayer:(DTIPlayer*)player
 {
-    _board = [[DTIGameBoard alloc] initWithExistingBoard:_board
-                                              andNewMove:square
-                                                asPlayer:player];
+    _board = [_board playSquare:square asPlayer:player];
     [_lastPlayedSquares addObject:square];
     [self update];
 }

@@ -40,7 +40,7 @@
 
 -(bool)playNextMove:(DTIGameBoard*)board
           forPlayer:(DTIPlayer*)player
-                        withComputer:(DTIPlayer*)computer
+       withComputer:(DTIPlayer*)computer
 {
     if( [board isDrawn] )
     {
@@ -48,21 +48,15 @@
     }
     else if( [board isWon] )
     {
-        if( computer == player) // means that the player won!
-        {
-            NSLog(@"Error: %@", board);
-            return false;
-        }
-        return true;
+        // Ensure that the last play was made by the computer, not the opponent
+        return computer != player;
     }
 
     DTIPlayer* nextPlayer = [player opponent];
     if( computer == player )
     {
         NSNumber* play = [computer makeBestPlayFor:board];
-        DTIGameBoard* nextBoard = [[DTIGameBoard alloc] initWithExistingBoard:board
-                                                                   andNewMove:play
-                                                                     asPlayer:player];
+        DTIGameBoard* nextBoard = [board playSquare:play asPlayer:player];
 
         return [self playNextMove:nextBoard forPlayer:nextPlayer withComputer:computer];
     }
@@ -71,9 +65,7 @@
         bool allTrue = true;
         for( NSNumber* availableMove in [board availableSpaces] )
         {
-            DTIGameBoard* nextBoard = [[DTIGameBoard alloc] initWithExistingBoard:board
-                                                                       andNewMove:availableMove
-                                                                         asPlayer:player];
+            DTIGameBoard* nextBoard = [board playSquare:availableMove asPlayer:player];
 
             allTrue &= [self playNextMove:nextBoard
                                 forPlayer:nextPlayer
