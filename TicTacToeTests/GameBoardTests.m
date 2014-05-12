@@ -54,7 +54,7 @@
     DTIPlayer* nextPlayer = [player opponent];
     if( board.computer == player )
     {
-        DTIGameBoard* nextBoard = [board.computer getBestPlayFor:board];
+        DTIGameBoard* nextBoard = [board.computer makeBestPlayFor:board];
 
         return [self playNextMove:nextBoard forPlayer:nextPlayer];
     }

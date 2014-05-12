@@ -66,7 +66,7 @@
 {
     if( [self isInPlay] )
     {
-        _board = [_board.computer getBestPlayFor:_board];
+        _board = [_board.computer makeBestPlayFor:_board];
         [self update];
     }
 }

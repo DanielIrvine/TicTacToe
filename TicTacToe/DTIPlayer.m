@@ -31,7 +31,7 @@
     return x;
 }
 
--(DTIGameBoard*)getBestPlayFor:(DTIGameBoard*)gameBoard
+-(DTIGameBoard*)makeBestPlayFor:(DTIGameBoard*)gameBoard
 {
     DTIPossibleMove* move = [self getBestPossibleMoveFor:gameBoard];
     return [[DTIGameBoard alloc] initWithExistingBoard:gameBoard
@@ -41,15 +41,6 @@
 
 -(DTIPossibleMove*)getBestPossibleMoveFor:(DTIGameBoard*)gameBoard
 {
-    if( [gameBoard isDrawn])
-    {
-        return [DTIPossibleMove moveWithScore:0 andSquare:gameBoard.lastPlayedSquare];
-    }
-    if( [gameBoard isWon])
-    {
-        return [DTIPossibleMove moveWithScore:-1 andSquare:gameBoard.lastPlayedSquare];
-    }
-
     DTIPossibleMove* bestMove;
     for( NSNumber* move in [gameBoard availableSpaces] )
     {
@@ -57,12 +48,23 @@
                                                                    andNewMove:move
                                                                      asPlayer:self];
 
-        DTIPossibleMove* theirMove = [self.opponent getBestPossibleMoveFor:nextBoard];
-        theirMove.score = -theirMove.score;
-        if( bestMove == nil || bestMove.score < theirMove.score )
+        if( [nextBoard isDrawn] )
         {
-            bestMove = [DTIPossibleMove moveWithScore:theirMove.score
-                                            andSquare:move];
+            bestMove = [DTIPossibleMove moveWithScore:0 andSquare:move];
+        }
+        if( [nextBoard isWon] )
+        {
+            bestMove = [DTIPossibleMove moveWithScore:1 andSquare:move];
+        }
+        else
+        {
+            DTIPossibleMove* theirMove = [self.opponent getBestPossibleMoveFor:nextBoard];
+            theirMove.score = -theirMove.score;
+            if( bestMove == nil || bestMove.score < theirMove.score )
+            {
+                bestMove = [DTIPossibleMove moveWithScore:theirMove.score
+                                                andSquare:move];
+            }
         }
     }
 

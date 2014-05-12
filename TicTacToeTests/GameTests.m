@@ -19,7 +19,7 @@
 -(void)testWhenTouchingOutsideWhenFinishedThenGameIsReset
 {
     DTIGameBoard* board = [[DTIGameBoard alloc] initWithComputerPlayerAs:[DTIPlayer createOpposingPlayers]];
-    [GameTests playSequence:@"XX-O-----" on:board];
+    board = [GameTests playSequence:@"XX-O-----" on:board];
 
     DTIGame* game = [[DTIGame alloc] initWithGameBoard:board];
     [game touchIn:4];  // to finish game
@@ -32,7 +32,7 @@
 -(void)testWhenTouchingInSquareWhenFinishedThenGameIsReset
 {
     DTIGameBoard* board = [[DTIGameBoard alloc] initWithComputerPlayerAs:[DTIPlayer createOpposingPlayers]];
-    [GameTests playSequence:@"XX-O-----" on:board];
+    board = [GameTests playSequence:@"XX-O-----" on:board];
 
     DTIGame* game = [[DTIGame alloc] initWithGameBoard:board];
     [game touchIn:4];  // to finish game
@@ -54,7 +54,7 @@
 -(void)testWhenGameLostThenIsLostValuesAreSet
 {
     DTIGameBoard* board = [[DTIGameBoard alloc] initWithComputerPlayerAs:[DTIPlayer createOpposingPlayers]];
-    [GameTests playSequence:@"XX-O-----" on:board];
+    board = [GameTests playSequence:@"XX-O-----" on:board];
 
     DTIGame* game = [[DTIGame alloc] initWithGameBoard:board];
     [game touchIn:4];
@@ -67,7 +67,7 @@
 -(void)testWhenGameDrawThenIsDrawnValuesAreSet
 {
     DTIGameBoard* board = [[DTIGameBoard alloc] initWithComputerPlayerAs:[DTIPlayer createOpposingPlayers]];
-    [GameTests playSequence:@"XXOOOXXX-" on:board];
+    board = [GameTests playSequence:@"XXOOOXXX-" on:board];
 
     DTIGame* game = [[DTIGame alloc] initWithGameBoard:board];
     [game touchIn:8];
@@ -97,17 +97,23 @@
     XCTAssertEqual(0, game.getPlaysInOrder.count);
 }
 
-+(void)playSequence:(NSString*)sequence on:(DTIGameBoard*)board
++(DTIGameBoard*)playSequence:(NSString*)sequence on:(DTIGameBoard*)board
 {
+    DTIGameBoard* newBoard = board;
     for( int i = 0; i < 9; ++i )
     {
         unichar c = [sequence characterAtIndex:i];
         if( c != '-' )
         {
-            [board play:[GameTests getPlayerForCharacter:c
-                         withXAs:board.computer] inSquare:i];
+            DTIPlayer* player = [GameTests getPlayerForCharacter:c
+                                                         withXAs:board.computer];
+            newBoard = [[DTIGameBoard alloc] initWithExistingBoard:newBoard
+                                                        andNewMove:@(i)
+                                                          asPlayer:player];
         }
     }
+
+    return newBoard;
 }
 
 +(id)getPlayerForCharacter:(unichar)character
