@@ -10,9 +10,7 @@
 
 @class DTIPlayer;
 
-@interface DTIGameBoard : NSObject {
-    NSArray* _computerPlayerRules;
-}
+@interface DTIGameBoard : NSObject
 
 @property (readonly) NSMutableArray* squares;
 @property (readonly) DTIPlayer* computer;
@@ -27,8 +25,8 @@
 
 -(bool)isWon;
 -(bool)isDrawn;
+-(bool)isWinFor:(DTIPlayer*)player;
 
--(void)play:(DTIPlayer*)player inSquare:(NSInteger)square;
 -(NSArray*)availableSpaces;
 -(NSArray*) winningTriplets;
 @end

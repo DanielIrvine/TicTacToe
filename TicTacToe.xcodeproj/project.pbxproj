@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		652C3935192102B50051A2D2 /* DTIPossibleMove.m in Sources */ = {isa = PBXBuildFile; fileRef = 652C3934192102B50051A2D2 /* DTIPossibleMove.m */; };
 		659DF29A191B6DD60065E54C /* GameTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 659DF299191B6DD60065E54C /* GameTests.m */; };
 		659E364C191A737800F464AE /* DTIPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 659E364B191A737800F464AE /* DTIPlayer.m */; };
 		659E3661191AE8EE00F464AE /* DTIGame.m in Sources */ = {isa = PBXBuildFile; fileRef = 659E3660191AE8EE00F464AE /* DTIGame.m */; };
@@ -41,8 +42,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		652C3933192102B50051A2D2 /* DTIPossibleMove.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTIPossibleMove.h; sourceTree = "<group>"; };
+		652C3934192102B50051A2D2 /* DTIPossibleMove.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTIPossibleMove.m; sourceTree = "<group>"; };
 		659DF299191B6DD60065E54C /* GameTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameTests.m; sourceTree = "<group>"; };
-		659DF29B191B7E490065E54C /* GameBoardTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameBoardTests.h; sourceTree = "<group>"; };
 		659E364A191A737800F464AE /* DTIPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTIPlayer.h; sourceTree = "<group>"; };
 		659E364B191A737800F464AE /* DTIPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTIPlayer.m; sourceTree = "<group>"; };
 		659E365F191AE8EE00F464AE /* DTIGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTIGame.h; sourceTree = "<group>"; };
@@ -149,6 +151,8 @@
 				659E364B191A737800F464AE /* DTIPlayer.m */,
 				659E365F191AE8EE00F464AE /* DTIGame.h */,
 				659E3660191AE8EE00F464AE /* DTIGame.m */,
+				652C3933192102B50051A2D2 /* DTIPossibleMove.h */,
+				652C3934192102B50051A2D2 /* DTIPossibleMove.m */,
 			);
 			path = TicTacToe;
 			sourceTree = "<group>";
@@ -170,7 +174,6 @@
 				659DF299191B6DD60065E54C /* GameTests.m */,
 				65F00F1319195515000657CB /* GameBoardTests.m */,
 				65F00F0E19195515000657CB /* Supporting Files */,
-				659DF29B191B7E490065E54C /* GameBoardTests.h */,
 			);
 			path = TicTacToeTests;
 			sourceTree = "<group>";
@@ -288,6 +291,7 @@
 				65F00EF119195514000657CB /* DTIAppDelegate.m in Sources */,
 				65F00EED19195514000657CB /* main.m in Sources */,
 				659E364C191A737800F464AE /* DTIPlayer.m in Sources */,
+				652C3935192102B50051A2D2 /* DTIPossibleMove.m in Sources */,
 				65F00EFA19195514000657CB /* DTIViewController.m in Sources */,
 				65F00F1F191958EC000657CB /* DTIGameBoard.m in Sources */,
 			);

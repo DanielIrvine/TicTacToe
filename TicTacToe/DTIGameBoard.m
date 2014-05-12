@@ -51,7 +51,7 @@ static NSArray* kWinningTriplets;
     {
         _squares = [board.squares mutableCopy];
         _squares[move.integerValue] = player;
-
+        _lastPlayedSquare = move;
         _computer = board.computer;
     }
 
@@ -60,16 +60,28 @@ static NSArray* kWinningTriplets;
 
 -(bool)isWon
 {
+    return [self getWinningTriplet] != nil;
+}
+
+-(bool)isWinFor:(DTIPlayer*)player
+{
+    NSArray* winningTriplet = [self getWinningTriplet];
+    return winningTriplet != nil
+    && (_squares[[winningTriplet[0] integerValue]] == player);
+}
+
+-(NSArray*)getWinningTriplet
+{
     for( NSArray* winningTriplet in kWinningTriplets )
     {
         if( [self threeSquaresAreEqual:[winningTriplet[0] integerValue]
                                       :[winningTriplet[1] integerValue]
                                       :[winningTriplet[2] integerValue]])
         {
-            return true;
+            return winningTriplet;
         }
     }
-    return false;
+    return nil;
 }
 
 -(bool)isDrawn
@@ -115,10 +127,18 @@ static NSArray* kWinningTriplets;
 -(NSString*)description
 {
     NSMutableString* str = [[NSMutableString alloc] init];
-    for( DTIPlayer* player in _squares)
+    for( id player in _squares)
     {
-        [str appendString:player.description];
+        if(player == [NSNull null])
+            [str appendString:@"-"];
+        else
+            [str appendString:[player description]];
     }
     return str;
+}
+
+-(NSString*)debugDescription
+{
+    return [self description];
 }
 @end

@@ -8,15 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
+@class DTIGameBoard;
+
 @interface DTIPlayer : NSObject {
     NSString* _player;
 }
 
++(DTIPlayer*)createOpposingPlayers;
 -(id)initWithPlayer:(NSString*)player;
--(DTIPlayer*)opponent;
 
-+(DTIPlayer*)x;
-+(DTIPlayer*)o;
-
+@property DTIPlayer* opponent;
+-(DTIGameBoard*)getBestPlayFor:(DTIGameBoard*)gameBoard;
 
 @end

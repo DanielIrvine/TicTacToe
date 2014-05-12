@@ -154,7 +154,7 @@ static NSString* kSquareFont = @"Chalkduster";
         [node removeAllChildren];
     }
 
-    _nextPlayer = [DTIPlayer x];
+    _nextPlayer = _game.x;
 
     [self hideResultLabels];
 }

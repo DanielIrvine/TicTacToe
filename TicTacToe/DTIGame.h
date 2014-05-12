@@ -20,6 +20,8 @@
 -(void)resetWithComputerFirst;
 -(void)resetWithPlayerFirst;
 
+@property (readonly) DTIPlayer* x;
+
 -(void)touchIn:(NSInteger)square;
 -(void)touchOutsideSquare;
 -(NSArray*)getPlaysInOrder;

@@ -7,9 +7,12 @@
 //
 
 #import <XCTest/XCTest.h>
-#import "GameBoardTests.h"
 #import "DTIGameBoard.h"
 #import "DTIPlayer.h"
+
+@interface GameBoardTests : XCTestCase
+
+@end
 
 @implementation GameBoardTests
 
@@ -21,12 +24,13 @@
 
 -(void)testAllPossibleGameBoardsResultInWin
 {
-    DTIGameBoard* computerFirst = [[DTIGameBoard alloc] initWithComputerPlayerAs:[DTIPlayer x]];
-    DTIGameBoard* humanFirst = [[DTIGameBoard alloc] initWithComputerPlayerAs:[DTIPlayer o]];
+    DTIPlayer* x = [DTIPlayer createOpposingPlayers];
 
-    DTIPlayer* firstPlayer = [DTIPlayer x];
-    XCTAssertTrue([self playNextMove:computerFirst forPlayer:firstPlayer]);
-    XCTAssertTrue([self playNextMove:humanFirst forPlayer:firstPlayer]);
+    DTIGameBoard* computerFirst = [[DTIGameBoard alloc] initWithComputerPlayerAs:x];
+    DTIGameBoard* humanFirst = [[DTIGameBoard alloc] initWithComputerPlayerAs:x.opponent];
+
+    XCTAssertTrue([self playNextMove:computerFirst forPlayer:x]);
+    XCTAssertTrue([self playNextMove:humanFirst forPlayer:x.opponent]);
 
 }
 
@@ -41,6 +45,7 @@
     {
         if( board.computer == player) // means that the player won!
         {
+            NSLog(@"Error: %@", board);
             return false;
         }
         return true;
@@ -49,11 +54,9 @@
     DTIPlayer* nextPlayer = [player opponent];
     if( board.computer == player )
     {
-        // TODO
-        return false;
-        //DTIGameBoard* nextBoard = [board playBestMove];
+        DTIGameBoard* nextBoard = [board.computer getBestPlayFor:board];
 
-        //return [self playNextMove:nextBoard forPlayer:nextPlayer];
+        return [self playNextMove:nextBoard forPlayer:nextPlayer];
     }
     else
     {

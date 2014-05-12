@@ -7,18 +7,10 @@
 //
 
 #import "DTIPlayer.h"
-
-static DTIPlayer* kX;
-static DTIPlayer* kO;
+#import "DTIGameBoard.h"
+#import "DTIPossibleMove.h"
 
 @implementation DTIPlayer
-
-+(void)initialize
-{
-
-    kX = [[DTIPlayer alloc] initWithPlayer:@"X"];
-    kO = [[DTIPlayer alloc] initWithPlayer:@"O"];
-}
 
 -(id)initWithPlayer:(NSString*)player
 {
@@ -30,21 +22,51 @@ static DTIPlayer* kO;
 
 }
 
--(DTIPlayer*)opponent
++(DTIPlayer*)createOpposingPlayers
 {
-    if (self == kX ) return kO;
-    if (self == kO) return kX;
-    return nil;
+    DTIPlayer* x = [[DTIPlayer alloc] initWithPlayer:@"X"];
+    DTIPlayer* o = [[DTIPlayer alloc] initWithPlayer:@"O"];
+    x.opponent = o;
+    o.opponent = x;
+    return x;
 }
 
-+(DTIPlayer*)x
+-(DTIGameBoard*)getBestPlayFor:(DTIGameBoard*)gameBoard
 {
-    return kX;
+    DTIPossibleMove* move = [self getBestPossibleMoveFor:gameBoard];
+    return [[DTIGameBoard alloc] initWithExistingBoard:gameBoard
+                                            andNewMove:move.square
+                                              asPlayer:self];
 }
 
-+(DTIPlayer*)o
+-(DTIPossibleMove*)getBestPossibleMoveFor:(DTIGameBoard*)gameBoard
 {
-    return kO;
+    if( [gameBoard isDrawn])
+    {
+        return [DTIPossibleMove moveWithScore:0 andSquare:gameBoard.lastPlayedSquare];
+    }
+    if( [gameBoard isWon])
+    {
+        return [DTIPossibleMove moveWithScore:-1 andSquare:gameBoard.lastPlayedSquare];
+    }
+
+    DTIPossibleMove* bestMove;
+    for( NSNumber* move in [gameBoard availableSpaces] )
+    {
+        DTIGameBoard* nextBoard = [[DTIGameBoard alloc] initWithExistingBoard:gameBoard
+                                                                   andNewMove:move
+                                                                     asPlayer:self];
+
+        DTIPossibleMove* theirMove = [self.opponent getBestPossibleMoveFor:nextBoard];
+        theirMove.score = -theirMove.score;
+        if( bestMove == nil || bestMove.score < theirMove.score )
+        {
+            bestMove = [DTIPossibleMove moveWithScore:theirMove.score
+                                            andSquare:move];
+        }
+    }
+
+    return bestMove;
 }
 
 -(NSString *)description
@@ -56,6 +78,7 @@ static DTIPlayer* kO;
 {
     return _player;
 }
+
 
 @end
 
