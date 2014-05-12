@@ -13,10 +13,8 @@
 @interface DTIGameBoard : NSObject
 
 @property (readonly) NSMutableArray* squares;
-@property (readonly) DTIPlayer* computer;
 
--(id)initWithComputerPlayerAs:(DTIPlayer*)player;
-
+-(id)init;
 -(id)initWithExistingBoard:(DTIGameBoard*)board
                 andNewMove:(NSNumber*)move
                   asPlayer:(DTIPlayer*)player;

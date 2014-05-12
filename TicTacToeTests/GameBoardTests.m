@@ -26,8 +26,8 @@
 {
     DTIPlayer* x = [DTIPlayer createOpposingPlayers];
 
-    DTIGameBoard* computerFirst = [[DTIGameBoard alloc] initWithComputerPlayerAs:x];
-    DTIGameBoard* humanFirst = [[DTIGameBoard alloc] initWithComputerPlayerAs:x.opponent];
+    DTIGameBoard* computerFirst = [[DTIGameBoard alloc] init];
+    DTIGameBoard* humanFirst = [[DTIGameBoard alloc] init];
 
     XCTAssertTrue([self playNextMove:computerFirst forPlayer:x]);
     XCTAssertTrue([self playNextMove:humanFirst forPlayer:x.opponent]);
@@ -54,7 +54,10 @@
     DTIPlayer* nextPlayer = [player opponent];
     if( board.computer == player )
     {
-        DTIGameBoard* nextBoard = [board.computer makeBestPlayFor:board];
+        NSNumber* play = [board.computer makeBestPlayFor:board];
+        DTIGameBoard* nextBoard = [[DTIGameBoard alloc] initWithExistingBoard:board
+                                                                   andNewMove:play
+                                                                     asPlayer:player];
 
         return [self playNextMove:nextBoard forPlayer:nextPlayer];
     }

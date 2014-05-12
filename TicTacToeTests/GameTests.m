@@ -18,10 +18,9 @@
 
 -(void)testWhenTouchingOutsideWhenFinishedThenGameIsReset
 {
-    DTIGameBoard* board = [[DTIGameBoard alloc] initWithComputerPlayerAs:[DTIPlayer createOpposingPlayers]];
-    board = [GameTests playSequence:@"XX-O-----" on:board];
+    DTIGame* game = [[DTIGame alloc] init];
+    [GameTests playSequence:@"XX-O-----" on:game];
 
-    DTIGame* game = [[DTIGame alloc] initWithGameBoard:board];
     [game touchIn:4];  // to finish game
     [game touchOutsideSquare];
 
@@ -31,10 +30,9 @@
 
 -(void)testWhenTouchingInSquareWhenFinishedThenGameIsReset
 {
-    DTIGameBoard* board = [[DTIGameBoard alloc] initWithComputerPlayerAs:[DTIPlayer createOpposingPlayers]];
-    board = [GameTests playSequence:@"XX-O-----" on:board];
+    DTIGame* game = [[DTIGame alloc] init];
+    [GameTests playSequence:@"XX-O-----" on:game];
 
-    DTIGame* game = [[DTIGame alloc] initWithGameBoard:board];
     [game touchIn:4];  // to finish game
     [game touchIn:5];
 
@@ -53,10 +51,9 @@
 
 -(void)testWhenGameLostThenIsLostValuesAreSet
 {
-    DTIGameBoard* board = [[DTIGameBoard alloc] initWithComputerPlayerAs:[DTIPlayer createOpposingPlayers]];
-    board = [GameTests playSequence:@"XX-O-----" on:board];
+    DTIGame* game = [[DTIGame alloc] init];
+    [GameTests playSequence:@"XX-O-----" on:game];
 
-    DTIGame* game = [[DTIGame alloc] initWithGameBoard:board];
     [game touchIn:4];
 
     XCTAssertTrue([game isLost]);
@@ -66,10 +63,9 @@
 
 -(void)testWhenGameDrawThenIsDrawnValuesAreSet
 {
-    DTIGameBoard* board = [[DTIGameBoard alloc] initWithComputerPlayerAs:[DTIPlayer createOpposingPlayers]];
-    board = [GameTests playSequence:@"XXOOOXXX-" on:board];
+    DTIGame* game = [[DTIGame alloc] init];
+    [GameTests playSequence:@"XXOOOXXX-" on:game];
 
-    DTIGame* game = [[DTIGame alloc] initWithGameBoard:board];
     [game touchIn:8];
 
     XCTAssertTrue([game isDrawn]);
@@ -97,23 +93,22 @@
     XCTAssertEqual(0, game.getPlaysInOrder.count);
 }
 
-+(DTIGameBoard*)playSequence:(NSString*)sequence on:(DTIGameBoard*)board
++(void)playSequence:(NSString*)sequence
+                          on:(DTIGame*)game
 {
-    DTIGameBoard* newBoard = board;
     for( int i = 0; i < 9; ++i )
     {
         unichar c = [sequence characterAtIndex:i];
         if( c != '-' )
         {
             DTIPlayer* player = [GameTests getPlayerForCharacter:c
-                                                         withXAs:board.computer];
-            newBoard = [[DTIGameBoard alloc] initWithExistingBoard:newBoard
+                                                         withXAs:game.x];
+            game.board = [[DTIGameBoard alloc] initWithExistingBoard:game.board
                                                         andNewMove:@(i)
                                                           asPlayer:player];
         }
     }
 
-    return newBoard;
 }
 
 +(id)getPlayerForCharacter:(unichar)character

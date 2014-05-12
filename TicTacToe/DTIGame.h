@@ -12,15 +12,16 @@
 @class DTIPlayer;
 
 @interface DTIGame : NSObject {
-    DTIGameBoard* _board;
     NSMutableArray* _lastPlayedSquares;
 }
 
--(id)initWithGameBoard:(DTIGameBoard*)board;
 -(void)resetWithComputerFirst;
 -(void)resetWithPlayerFirst;
 
 @property (readonly) DTIPlayer* x;
+@property (readonly) DTIPlayer* computer;
+@property (readonly) DTIPlayer* human;
+@property DTIGameBoard* board;
 
 -(void)touchIn:(NSInteger)square;
 -(void)touchOutsideSquare;

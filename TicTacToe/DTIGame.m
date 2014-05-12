@@ -14,18 +14,12 @@
 
 -(id)init
 {
-    return [self initWithGameBoard:nil];
-}
-
--(id)initWithGameBoard:(DTIGameBoard*)board
-{
     if(self = [super init])
     {
         [self reset];
         _lastPlayedSquares = [[NSMutableArray alloc] init];
-        _board = board;
-
         _x = [DTIPlayer createOpposingPlayers];
+        [self resetWithComputerFirst];
     }
     return self;
 }
@@ -41,22 +35,29 @@
 {
     [self reset];
 
-    _board = [[DTIGameBoard alloc] initWithComputerPlayerAs:_x];
+    _board = [[DTIGameBoard alloc] init];
+    [self setComputerAndOpponentWith:_x];
     [self playComputer];
 }
 
 -(void)resetWithPlayerFirst
 {
     [self reset];
-    _board = [[DTIGameBoard alloc] initWithComputerPlayerAs:_x.opponent];
+    _board = [[DTIGameBoard alloc] init];
+    [self setComputerAndOpponentWith:[_x opponent]];
 }
 
+-(void)setComputerAndOpponentWith:(DTIPlayer*)computer
+{
+    _computer = computer;
+    _human = [computer opponent];
+}
 -(void)play:(NSNumber*)square
 {
     if( [self isInPlay] )
     {
         [self makePlayInSquare:square
-                     forPlayer:[_board.computer opponent]];
+                     forPlayer:_human];
     }
 }
 
@@ -64,8 +65,8 @@
 {
     if( [self isInPlay] )
     {
-        [self makePlayInSquare:[_board.computer makeBestPlayFor:_board]
-                     forPlayer:_board.computer];
+        [self makePlayInSquare:[_computer makeBestPlayFor:_board]
+                     forPlayer:_computer];
     }
 }
 

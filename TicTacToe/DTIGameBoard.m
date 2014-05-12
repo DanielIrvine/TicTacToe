@@ -30,7 +30,7 @@ static NSArray* kWinningTriplets;
     return kWinningTriplets;
 }
 
--(id)initWithComputerPlayerAs:(DTIPlayer*)player
+-(id)init
 {
     if(self = [super init])
     {
@@ -38,7 +38,6 @@ static NSArray* kWinningTriplets;
         for (NSInteger i = 0; i < 9; i++) {
             [_squares insertObject:[NSNull null] atIndex:i];
         }
-        _computer = player;
     }
     return self;
 }
@@ -51,7 +50,6 @@ static NSArray* kWinningTriplets;
     {
         _squares = [board.squares mutableCopy];
         _squares[move.integerValue] = player;
-        _computer = board.computer;
     }
 
     return self;
