@@ -126,4 +126,17 @@ static NSArray* kWinningTriplets;
 {
     return [self description];
 }
+
+-(DTIGameBoard*)rotateBy:(NSArray*)rotation
+{
+    DTIGameBoard* rotated = [[DTIGameBoard alloc] init];
+    for( int i = 0; i < 9; ++i )
+    {
+        rotated = [[DTIGameBoard alloc] initWithExistingBoard:rotated
+                                                   andNewMove:rotation[i]
+                                                     asPlayer:_squares[i]];
+    }
+    return rotated;
+}
+
 @end

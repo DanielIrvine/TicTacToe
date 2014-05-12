@@ -24,4 +24,12 @@
     return [[DTIPossibleMove alloc] initWithScore:score andSquare:square];
 }
 
+
+-(DTIPossibleMove*)derotateBy:(NSArray*)rotation
+{
+    NSNumber* previousPosition = @([rotation indexOfObject:_square]);
+    return [DTIPossibleMove buildWithScore:_score
+                                 andSquare:previousPosition];
+}
+
 @end

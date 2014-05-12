@@ -12,4 +12,5 @@
 @property (readonly) NSNumber* square;
 
 +(DTIPossibleMove*)buildWithScore:(NSInteger)score andSquare:(NSNumber*)square;
+-(DTIPossibleMove*)derotateBy:(NSArray*)rotation;
 @end

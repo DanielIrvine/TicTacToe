@@ -24,4 +24,6 @@
 
 -(NSArray*)availableSpaces;
 -(NSArray*)winningTriplets;
+
+-(DTIGameBoard*)rotateBy:(NSArray*)rotation;
 @end

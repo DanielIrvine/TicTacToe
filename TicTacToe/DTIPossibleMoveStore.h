@@ -11,6 +11,7 @@
 
 @interface DTIPossibleMoveStore : NSObject{
     NSMutableDictionary* _store;
+    NSArray* _rotations;
 }
 
 -(DTIPossibleMove*)getAlreadyCalculatedValueFor:(DTIGameBoard*)gameBoard;
