@@ -51,14 +51,12 @@
     _board = [[DTIGameBoard alloc] initWithComputerPlayerAs:_x.opponent];
 }
 
--(void)play:(NSInteger)square
+-(void)play:(NSNumber*)square
 {
     if( [self isInPlay] )
     {
-        _board = [[DTIGameBoard alloc] initWithExistingBoard:_board
-                                                  andNewMove:@(square)
-                                                    asPlayer:[_board.computer opponent]];
-        [self update];
+        [self makePlayInSquare:square
+                     forPlayer:[_board.computer opponent]];
     }
 }
 
@@ -66,14 +64,22 @@
 {
     if( [self isInPlay] )
     {
-        _board = [_board.computer makeBestPlayFor:_board];
-        [self update];
+        [self makePlayInSquare:[_board.computer makeBestPlayFor:_board]
+                     forPlayer:_board.computer];
     }
+}
+
+-(void)makePlayInSquare:(NSNumber*)square forPlayer:(DTIPlayer*)player
+{
+    _board = [[DTIGameBoard alloc] initWithExistingBoard:_board
+                                              andNewMove:square
+                                                asPlayer:player];
+    [_lastPlayedSquares addObject:square];
+    [self update];
 }
 
 -(void)update
 {
-    [_lastPlayedSquares addObject:_board.lastPlayedSquare];
 
     if( [_board isWon] ) { // This is always a win for the computer
         _lost++;
@@ -95,7 +101,7 @@
     else
     {
         [_lastPlayedSquares removeAllObjects];
-        [self play:square];
+        [self play:@(square)];
         [self playComputer];
     }
 }

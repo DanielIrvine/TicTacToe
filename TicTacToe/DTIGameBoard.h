@@ -15,8 +15,6 @@
 @property (readonly) NSMutableArray* squares;
 @property (readonly) DTIPlayer* computer;
 
-@property (readonly) NSNumber* lastPlayedSquare;
-
 -(id)initWithComputerPlayerAs:(DTIPlayer*)player;
 
 -(id)initWithExistingBoard:(DTIGameBoard*)board

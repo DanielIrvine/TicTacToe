@@ -51,7 +51,6 @@ static NSArray* kWinningTriplets;
     {
         _squares = [board.squares mutableCopy];
         _squares[move.integerValue] = player;
-        _lastPlayedSquare = move;
         _computer = board.computer;
     }
 

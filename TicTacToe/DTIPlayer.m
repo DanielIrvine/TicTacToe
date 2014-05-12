@@ -31,12 +31,10 @@
     return x;
 }
 
--(DTIGameBoard*)makeBestPlayFor:(DTIGameBoard*)gameBoard
+-(NSNumber*)makeBestPlayFor:(DTIGameBoard*)gameBoard
 {
     DTIPossibleMove* move = [self getBestPossibleMoveFor:gameBoard];
-    return [[DTIGameBoard alloc] initWithExistingBoard:gameBoard
-                                            andNewMove:move.square
-                                              asPlayer:self];
+    return move.square;
 }
 
 -(DTIPossibleMove*)getBestPossibleMoveFor:(DTIGameBoard*)gameBoard

@@ -18,6 +18,6 @@
 -(id)initWithPlayer:(NSString*)player;
 
 @property DTIPlayer* opponent;
--(DTIGameBoard*)makeBestPlayFor:(DTIGameBoard*)gameBoard;
+-(NSNumber*)makeBestPlayFor:(DTIGameBoard*)gameBoard;
 
 @end
