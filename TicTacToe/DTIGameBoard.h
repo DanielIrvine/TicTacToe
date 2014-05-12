@@ -25,8 +25,7 @@
 
 -(bool)isWon;
 -(bool)isDrawn;
--(bool)isWinFor:(DTIPlayer*)player;
 
 -(NSArray*)availableSpaces;
--(NSArray*) winningTriplets;
+-(NSArray*)winningTriplets;
 @end

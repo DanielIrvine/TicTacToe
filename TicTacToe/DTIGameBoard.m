@@ -63,13 +63,6 @@ static NSArray* kWinningTriplets;
     return [self getWinningTriplet] != nil;
 }
 
--(bool)isWinFor:(DTIPlayer*)player
-{
-    NSArray* winningTriplet = [self getWinningTriplet];
-    return winningTriplet != nil
-    && (_squares[[winningTriplet[0] integerValue]] == player);
-}
-
 -(NSArray*)getWinningTriplet
 {
     for( NSArray* winningTriplet in kWinningTriplets )
@@ -105,11 +98,6 @@ static NSArray* kWinningTriplets;
     return _squares[one] != [NSNull null]
     && _squares[one] == _squares[two]
     && _squares[one] == _squares[three];
-}
-
--(void)play:(DTIPlayer*)player inSquare:(NSInteger)square
-{
-    _lastPlayedSquare = @(square);
 }
 
 -(NSArray*)availableSpaces
