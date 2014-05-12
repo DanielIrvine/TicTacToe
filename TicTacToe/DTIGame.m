@@ -19,7 +19,8 @@
         [self reset];
         _lastPlayedSquares = [[NSMutableArray alloc] init];
         _x = [DTIPlayer createOpposingPlayers];
-        [self resetWithComputerFirst];
+        [self setComputerAndOpponentWith:_x];
+        _board = [[DTIGameBoard alloc] init];
     }
     return self;
 }

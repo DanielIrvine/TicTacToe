@@ -29,13 +29,18 @@
     DTIGameBoard* computerFirst = [[DTIGameBoard alloc] init];
     DTIGameBoard* humanFirst = [[DTIGameBoard alloc] init];
 
-    XCTAssertTrue([self playNextMove:computerFirst forPlayer:x]);
-    XCTAssertTrue([self playNextMove:humanFirst forPlayer:x.opponent]);
+    XCTAssertTrue([self playNextMove:computerFirst
+                           forPlayer:x
+                        withComputer:x]);
+    XCTAssertTrue([self playNextMove:humanFirst
+                           forPlayer:x
+                        withComputer:x.opponent]);
 
 }
 
 -(bool)playNextMove:(DTIGameBoard*)board
           forPlayer:(DTIPlayer*)player
+                        withComputer:(DTIPlayer*)computer
 {
     if( [board isDrawn] )
     {
@@ -43,7 +48,7 @@
     }
     else if( [board isWon] )
     {
-        if( board.computer == player) // means that the player won!
+        if( computer == player) // means that the player won!
         {
             NSLog(@"Error: %@", board);
             return false;
@@ -52,14 +57,14 @@
     }
 
     DTIPlayer* nextPlayer = [player opponent];
-    if( board.computer == player )
+    if( computer == player )
     {
-        NSNumber* play = [board.computer makeBestPlayFor:board];
+        NSNumber* play = [computer makeBestPlayFor:board];
         DTIGameBoard* nextBoard = [[DTIGameBoard alloc] initWithExistingBoard:board
                                                                    andNewMove:play
                                                                      asPlayer:player];
 
-        return [self playNextMove:nextBoard forPlayer:nextPlayer];
+        return [self playNextMove:nextBoard forPlayer:nextPlayer withComputer:computer];
     }
     else
     {
@@ -70,7 +75,9 @@
                                                                        andNewMove:availableMove
                                                                          asPlayer:player];
 
-            allTrue &= [self playNextMove:nextBoard forPlayer:nextPlayer];
+            allTrue &= [self playNextMove:nextBoard
+                                forPlayer:nextPlayer
+                             withComputer:computer];
         }
 
         return allTrue;

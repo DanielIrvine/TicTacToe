@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		652C3935192102B50051A2D2 /* DTIPossibleMove.m in Sources */ = {isa = PBXBuildFile; fileRef = 652C3934192102B50051A2D2 /* DTIPossibleMove.m */; };
+		652C3938192123F60051A2D2 /* DTIPossibleMoveStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 652C3937192123F60051A2D2 /* DTIPossibleMoveStore.m */; };
 		659DF29A191B6DD60065E54C /* GameTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 659DF299191B6DD60065E54C /* GameTests.m */; };
 		659E364C191A737800F464AE /* DTIPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 659E364B191A737800F464AE /* DTIPlayer.m */; };
 		659E3661191AE8EE00F464AE /* DTIGame.m in Sources */ = {isa = PBXBuildFile; fileRef = 659E3660191AE8EE00F464AE /* DTIGame.m */; };
@@ -44,6 +45,8 @@
 /* Begin PBXFileReference section */
 		652C3933192102B50051A2D2 /* DTIPossibleMove.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTIPossibleMove.h; sourceTree = "<group>"; };
 		652C3934192102B50051A2D2 /* DTIPossibleMove.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTIPossibleMove.m; sourceTree = "<group>"; };
+		652C3936192123F60051A2D2 /* DTIPossibleMoveStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTIPossibleMoveStore.h; sourceTree = "<group>"; };
+		652C3937192123F60051A2D2 /* DTIPossibleMoveStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTIPossibleMoveStore.m; sourceTree = "<group>"; };
 		659DF299191B6DD60065E54C /* GameTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameTests.m; sourceTree = "<group>"; };
 		659E364A191A737800F464AE /* DTIPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTIPlayer.h; sourceTree = "<group>"; };
 		659E364B191A737800F464AE /* DTIPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTIPlayer.m; sourceTree = "<group>"; };
@@ -153,6 +156,8 @@
 				659E3660191AE8EE00F464AE /* DTIGame.m */,
 				652C3933192102B50051A2D2 /* DTIPossibleMove.h */,
 				652C3934192102B50051A2D2 /* DTIPossibleMove.m */,
+				652C3936192123F60051A2D2 /* DTIPossibleMoveStore.h */,
+				652C3937192123F60051A2D2 /* DTIPossibleMoveStore.m */,
 			);
 			path = TicTacToe;
 			sourceTree = "<group>";
@@ -288,6 +293,7 @@
 			files = (
 				659E3661191AE8EE00F464AE /* DTIGame.m in Sources */,
 				65F00EFD19195515000657CB /* DTIGameScene.m in Sources */,
+				652C3938192123F60051A2D2 /* DTIPossibleMoveStore.m in Sources */,
 				65F00EF119195514000657CB /* DTIAppDelegate.m in Sources */,
 				65F00EED19195514000657CB /* main.m in Sources */,
 				659E364C191A737800F464AE /* DTIPlayer.m in Sources */,

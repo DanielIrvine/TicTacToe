@@ -10,12 +10,18 @@
 
 @implementation DTIPossibleMove
 
+-(id)initWithScore:(NSInteger)score andSquare:(NSNumber*)square
+{
+    if(self = [super init])
+    {
+        _score = score;
+        _square = square;
+    }
+    return self;
+}
 +(DTIPossibleMove*)buildWithScore:(NSInteger)score andSquare:(NSNumber*)square
 {
-    DTIPossibleMove* move = [[DTIPossibleMove alloc] init];
-    move.score = score;
-    move.square = square;
-    return move;
+    return [[DTIPossibleMove alloc] initWithScore:score andSquare:square];
 }
 
 @end

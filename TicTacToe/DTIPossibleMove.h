@@ -8,8 +8,8 @@
 
 @interface DTIPossibleMove : NSObject
 
-@property NSInteger score;
-@property NSNumber* square;
+@property (readonly) NSInteger score;
+@property (readonly) NSNumber* square;
 
 +(DTIPossibleMove*)buildWithScore:(NSInteger)score andSquare:(NSNumber*)square;
 @end
