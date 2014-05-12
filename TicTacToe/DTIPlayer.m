@@ -50,11 +50,11 @@
 
         if( [nextBoard isDrawn] )
         {
-            bestMove = [DTIPossibleMove moveWithScore:0 andSquare:move];
+            bestMove = [DTIPossibleMove buildWithScore:0 andSquare:move];
         }
         if( [nextBoard isWon] )
         {
-            bestMove = [DTIPossibleMove moveWithScore:1 andSquare:move];
+            bestMove = [DTIPossibleMove buildWithScore:1 andSquare:move];
         }
         else
         {
@@ -62,8 +62,8 @@
             theirMove.score = -theirMove.score;
             if( bestMove == nil || bestMove.score < theirMove.score )
             {
-                bestMove = [DTIPossibleMove moveWithScore:theirMove.score
-                                                andSquare:move];
+                bestMove = [DTIPossibleMove buildWithScore:theirMove.score
+                                                 andSquare:move];
             }
         }
     }

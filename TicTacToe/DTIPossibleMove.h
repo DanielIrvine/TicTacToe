@@ -11,5 +11,5 @@
 @property NSInteger score;
 @property NSNumber* square;
 
-+(DTIPossibleMove*)moveWithScore:(NSInteger)score andSquare:(NSNumber*)square;
++(DTIPossibleMove*)buildWithScore:(NSInteger)score andSquare:(NSNumber*)square;
 @end

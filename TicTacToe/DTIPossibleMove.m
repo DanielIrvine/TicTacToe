@@ -10,7 +10,7 @@
 
 @implementation DTIPossibleMove
 
-+(DTIPossibleMove*)moveWithScore:(NSInteger)score andSquare:(NSNumber*)square
++(DTIPossibleMove*)buildWithScore:(NSInteger)score andSquare:(NSNumber*)square
 {
     DTIPossibleMove* move = [[DTIPossibleMove alloc] init];
     move.score = score;
